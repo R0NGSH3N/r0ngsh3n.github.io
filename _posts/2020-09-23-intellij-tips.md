@@ -8,7 +8,7 @@ categories: common
 
 ## No more "Alt + Enter" : Modify the "Auto Import" option
 
-![Picture 1](../images/intellij-tips-1.PNG)
+![Picture 1](https://r0ngsh3n.github.io/static/img/0923/intellij-tips-1.PNG)
 
 This will optimize you imports without use `Ctrl + Alt + o`
 
@@ -26,23 +26,23 @@ I use `Ctrl + ;` because ";" looks like 2 windows (dots) arrange horizontally.
 
 in browser you can use `Ctrl + +/-` zoom in and zoom out, in Intellij, you can enable zoom function too (see below) picture, but it use `Ctrl + mouse wheel`, personally I think this is better than `Ctrl + +/-`.
 
-![Picture 1](images/intellij-tips-2.PNG)
+![Picture 1](https://r0ngsh3n.github.io/static/img/0923/intellij-tips-2.PNG)
 
 ## Show method seperator
 
 Following picture show the code with method seperator enabled: 
 
-![Method Seperator Enabled](images/intellij-tips-4.PNG)
+![Method Seperator Enabled](https://r0ngsh3n.github.io/static/img/0923/intellij-tips-4.PNG)
 
 if you like, you can enable it in Settings:
 
-![Picture 4](../images/intellij-tips-3.PNG)
+![Picture 4](https://r0ngsh3n.github.io/static/img/0923/intellij-tips-3.PNG)
 
 ## Jump between windows with `Alt + number`
 
 There are window in Intellij with number:
 
-![Picture 5](../images/intellij-tips-5.PNG)
+![Picture 5](https://r0ngsh3n.github.io/static/img/0923/intellij-tips-5.PNG)
 
 you can use `Alt + number` to open thoese windows, eg. if you want to open "Favorites" window, press `Alt + 2`, it will open the favorites window immediately.
 
@@ -52,7 +52,7 @@ When you don't want to see `Project` window, you can use `Shift + Esc` to minimi
 
 `Ctrl + Shift + A` is for "find Action", once you click it will pop dialog let you type in the action you want, and it will list the action with the shortcut.
 
-![Picture 6](../images/intellij-tips-6.PNG)
+![Picture 6](https://r0ngsh3n.github.io/static/img/0923/intellij-tips-6.PNG)
 
 ## Refact with `Shift + F6` and `Ctrl + F6`
 
@@ -60,7 +60,7 @@ On an variable, `Shift + F6` and then change variable name, Intellij will change
 
 On an method, `Ctrl + F6` will open dialog to let you change the signature of this method.
 
-![Picture 9](../images/intellij-tips-9.PNG)
+![Picture 9](https://r0ngsh3n.github.io/static/img/0923/intellij-tips-9.PNG)
 
 * You also can use `Alt + Enter` in the implement of this method to modify the signature of the method.
 
@@ -84,25 +84,25 @@ Different as GIT, show local history will bring you the changes that stored in I
 
 `Alt + Shift + A` then type "Show History"
 
-![Picture 10](../images/intellij-tips-1S.PNG)
+![Picture 10](https://r0ngsh3n.github.io/static/img/0923/intellij-tips-10.PNG)
 
-## jump between previous <-> next in the code
+## Jump between previous <-> next in the code
 
 `Ctrl + Alt + right Arrow" : jump to next point
 
 `Ctrl + Alt + Left Arrow" : jump back to previous point
 
-## jump between java files by `Ctrl + n`
+## Jump between java files by `Ctrl + n`
 
 This help you to jump(search) to a java file by type a few word of that java class name, this is better than you search that java class file in the project window.
 
-![Picture 8](../images/intellij-tips-8.PNG)
+![Picture 8](https://r0ngsh3n.github.io/static/img/0923/intellij-tips-8.PNG)
 
 if you want to jump(search) to a non-java file, you can use `Ctrl + Shift + N`
 
 you also can use `Ctrl + Alt + Shift + N` to search function name and then jump to that function
 
-## Jump between methods in same file 
+## Jump between methods in same file
 
 `Ctrl + F12` will popup a small dialog box list all the methods of current file, then you can choose to jump
 
@@ -114,7 +114,7 @@ if you save some code in the project as code snippet, you can use `Book Mark` fu
 
 `Ctrl + F11` allow you to save book mark with either 1 number or 1 letter (uppercase)
 
-![Picture 7](../images/intellij-tips-7.jpeg)
+![Picture 7](https://r0ngsh3n.github.io/static/img/0923/intellij-tips-7.jpeg)
 
 ## Add current java file/Method to my favorite!
 
