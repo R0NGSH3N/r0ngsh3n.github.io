@@ -12,7 +12,7 @@ categories: common
 
 This will optimize you imports without use `Ctrl + Alt + o`
 
-* Shortcut for "Split Vertical" and "Split Horizontally"
+## Shortcut for "Split Vertical" and "Split Horizontally"
 
 I usually define "Split and move right" instead of "Split Vertical", this "move" current window to Vertical right intead of "copy".
 
