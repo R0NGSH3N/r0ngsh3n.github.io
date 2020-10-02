@@ -26,13 +26,13 @@ I use `Ctrl + ;` because ";" looks like 2 windows (dots) arrange horizontally.
 
 in browser you can use `Ctrl + +/-` zoom in and zoom out, in Intellij, you can enable zoom function too (see below) picture, but it use `Ctrl + mouse wheel`, personally I think this is better than `Ctrl + +/-`.
 
-![Picture 1](../images/intellij-tips-2.PNG)
+![Picture 1](images/intellij-tips-2.PNG)
 
 ## Show method seperator
 
 Following picture show the code with method seperator enabled: 
 
-![Method Seperator Enabled](../images/intellij-tips-4.PNG)
+![Method Seperator Enabled](images/intellij-tips-4.PNG)
 
 if you like, you can enable it in Settings:
 
