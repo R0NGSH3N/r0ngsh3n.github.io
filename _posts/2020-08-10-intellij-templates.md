@@ -6,11 +6,11 @@ categories: common
 ---
 ## Useful Live template for Java
 
-In Class
+### In Class
 
 `main` and `psvm` - generate main method
 
-In Method:
+### In Method:
 
 `sout` - System.out.println
 
@@ -30,7 +30,7 @@ In Method:
 
 `B` and `P` - surround with {} or ()
 
-Iteration
+### Iteration
 
 `fori` and `itar` - empty for loop with "i" / cloest array iteration
 
