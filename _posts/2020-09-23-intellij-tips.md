@@ -52,7 +52,7 @@ When you don't want to see `Project` window, you can use `Shift + Esc` to minimi
 
 `Ctrl + Shift + A` is for "find Action", once you click it will pop dialog let you type in the action you want, and it will list the action with the shortcut.
 
-![Picture 6](https://r0ngsh3n.github.io/static/img/0923/intellij-tips-6.PNG)
+![Picture 6](https://r0ngsh3n.github.io/static/img/0923/intellij-tips-6.png)
 
 ## Refact with `Shift + F6` and `Ctrl + F6`
 
