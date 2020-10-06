@@ -7,8 +7,8 @@ categories: common
 
 ## Spring DATA JPA VS Spring JDBC Template
 
-    There are lot of ways to implement Spring DATA JPA, but I would say, when the Object design is simple: means not so many relations(is it or has it) between objects, then use
-    Spring DATA JPA, if the Object design is complicatd: 3+ table composite into 1 object or the query is complicated, I would suggest use JDBC Template object which let you write SQL and handle the O/R mapping by yourself...it is not that difficult.
+There are lot of ways to implement Spring DATA JPA, but I would say, when the Object design is simple: means not so many relations(is it or has it) between objects, then use
+Spring DATA JPA, if the Object design is complicatd: 3+ table composite into 1 object or the query is complicated, I would suggest use JDBC Template object which let you write SQL and handle the O/R mapping by yourself...it is not that difficult.
 
 ### Set up H2 testing Database
 
@@ -68,11 +68,13 @@ spring.data.jpa.repositories.bootstrap-mode=default
 
 3.Start the application, and go to `http://localhost:8080/h2-console`
 you should see the screen as following:
+
 ![Picture 1](https://r0ngsh3n.github.io/static/img/0322/pic1.PNG)
 
 4.Change the JDBC text into this
 `jdbc:h2:mem:testdb`
 5.You should see `USER` table in the testdb
+
 ![Picture 2](https://r0ngsh3n.github.io/static/img/0322/pic2.PNG)
 
 ### One to Many relationship
