@@ -13,8 +13,11 @@ You can either create project by `Spring Initializr`: by adding cloud components
 
 <u>So Our approach is download the spring boot project then build from there:</u>
 
-## Add Spring Cloud into your Spring boot project
-Assume you have created spring boot project, now update the `build.gradle` as following to add Spring Cloud function to your Spring Boot project.
+## Create Spring Cloud Project in Intellij:
+Since I am using Intellij IDEA Community Version, so I don't have `Spring Initiazr` tool, and what I did is create a new Java project with Gradle, then did following:
+
+1. open the 
+
 
 ~~~gradle
 plugins {
