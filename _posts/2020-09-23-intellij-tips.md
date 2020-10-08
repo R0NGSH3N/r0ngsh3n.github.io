@@ -4,7 +4,11 @@ title: Intellij Setup Tips
 tags: java IDE Intellij Productivity 
 categories: common
 ---
+Tips of using Intellij IDEA, update continue....
 
+## IdeaVim
+
+multi lines indent: `Shift + v Shift + >`
 
 ## No more "Alt + Enter" : Modify the "Auto Import" option
 
