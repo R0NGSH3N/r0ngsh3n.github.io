@@ -47,6 +47,7 @@ test {
 ~~~
 
 <Strong>You MUST need to understand the different Spring Cloud version first, I am using `Hoston` version</Strong>
+
 | Release Train | Boot Version |
 |---------------|--------------|
 | Hoxton        | 2.2.x and up |
