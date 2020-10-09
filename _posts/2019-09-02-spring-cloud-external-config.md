@@ -1,0 +1,90 @@
+---
+layout: post
+title: Super Simple Spring Cloud - Externalized Configuration
+tags: java Spring Cloud Microservice ConfigServer ConfigClient 
+categories: common
+---
+
+External Config let you config all the service in 1 place, the benefit is not in the scope of this article.
+
+official site: https://spring.io/projects/spring-cloud-config
+
+There are 2 parts of Spring Cloud Config
+
+1.`Config Server` - where all the configuration of the service at
+2 `Config Client` - plug into each service that help service to retrieve configuration from server.
+
+## Spring Cloud family: 
+
+| Component name | Function Description             |
+|----------------|----------------------------------|
+| Spring Actuator| Monitor your application's health|
+| Eureka/Zookeeper | Service Registration provider(for Service Discovery)  |
+| Ribbon         | Load Balancer (for service)|
+| Feign (Client) | replacement of RestTemplate/Web Client|
+| Hystrix|isolate failed service |
+| Spring Cloud Gateway | Microservice Gateway|
+| Spring Cloud Config | Externalized Config|
+| Spring Cloud Slueth | Provide (Services) Distributed Tracing|
+
+
+
+## Spring Config Server
+
+Since we are going to put all the service's config files together in some where, so the name will not be `application.yml` any more, the config file name definition need to be one of following"
+
+```
+/{application}/{profile}[/{label}] 
+/{application}-{profile}.yml
+/{label}/{application}-{profile}.yml
+/{application}-{profile}.properties
+/{label}/{application}-{profile}.properties
+```
+
+`application`: is your service name, in my example, `application` = `producer-helloworld-service`
+
+I define `profile` as environment: `dev`, `qa`,`uat`,`prod`
+
+`label` usually is version
+
+I will use `yml` as config file format.
+
+
+The config files need to be put in `git`, it could be put as `per repo per application(service)` or `per repo per profile`.
+
+I prefer `per repo per profile`, that means I will have 4 git `repo`(per report per profile): `dev`,`qa`,`uat`,`prod`
+
+The detail information: https://cloud.spring.io/spring-cloud-config/multi/multi__spring_cloud_config_server.html
+
+### Set up Git Repository as backend for config server
+
+### Set up File System as backend for config server
+You also can put config into the local, so you don't need those git repo. but you need to start config server as `native`
+
+1.Change your `application.yml` in config server like following:
+
+~~~
+server:
+  port: 9001
+spring:
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations: classpath:config-repo/${profile}
+
+management:
+  security:
+    enabled: false
+~~~
+
+2.copy config-repo to your `resources` folder
+
+3.Start your config server as 
+~~~bash
+java -jar build/libs/configserver-0.0.1-SNAPSHOT.jar --spring.profiles.active=native
+~~~
+
+## Spring Config Client

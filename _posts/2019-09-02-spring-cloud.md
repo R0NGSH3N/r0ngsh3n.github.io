@@ -73,12 +73,14 @@ Producer:  provide service. eg: `UserService` provide `findByUserName` service(m
 | Feign (Client) | replacement of RestTemplate/Web Client|
 | Hystrix|isolate failed service |
 | Spring Cloud Gateway | Microservice Gateway|
-| Spring Cloud Config | Server Config/Client Config|
+| Spring Cloud Config | Externalized Config|
 | Spring Cloud Slueth | Provide (Services) Distributed Tracing|
 
 
 ### Spring Actuator and Micrometer
-**In Spring Boot 2.x Actuator disabled most of `endpoint`, only `/health` and `/info` are available
+
+link
+
 
 ### Zookeeper
 I use Zookeeper here, it is better than Eureka, here is [why.](https://medium.com/knerd/eureka-why-you-shouldnt-use-zookeeper-for-service-discovery-4932c5c7e764)
