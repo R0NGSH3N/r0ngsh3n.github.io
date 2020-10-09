@@ -1,11 +1,16 @@
 ---
 layout: post
-title: Set up micro service project with Spring Cloud and Github 
-tags: java Spring Cloud Microservice 
+title: Microservice in Intellij with Spring Cloud and Github 
+tags: java Spring Cloud Microservice Intellij Github
 categories: common
 ---
 
-This Article show how to set up a `Micro Service` projects in Intellij IDEA community version.
+This Article show how to set up a `Micro Service` projects in Intellij IDEA community version, But you don't need to repeat this again, you can 
+
+
+[```git clone https://github.com/R0NGSH3N/spring-cloud-template.git```](https://github.com/R0NGSH3N/spring-cloud-template)
+
+In intellij, open the `build.gradle` file as project, and you will get "skeleton" spring cloud project in system.
 
 ## Trouble
 When I start to learn micro services with Spring cloud, the first question for me is what is the project structure for micro service? because there are so many different service in a big umberella and there is no clean way to set up. So I try to write down my approach howt to set up those projects and hope there is easier way.
@@ -56,9 +61,9 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 }
+~~~
 
 5.rebuild the project. 
-~~~
 
 
 
