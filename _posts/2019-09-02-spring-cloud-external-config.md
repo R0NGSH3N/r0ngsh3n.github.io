@@ -31,32 +31,21 @@ There are 2 parts of Spring Cloud Config
 
 ## Spring Config Server
 
-Since we are going to put all the service's config files together in some where, so the name will not be `application.yml` any more, the config file name definition need to be one of following"
+Since we are going to put all the service's config files together in some where, so the name will not be `application.yml` any more, the file name will be `application name`.yml, eg: 
 
-```
-/{application}/{profile}[/{label}] 
-/{application}-{profile}.yml
-/{label}/{application}-{profile}.yml
-/{application}-{profile}.properties
-/{label}/{application}-{profile}.properties
-```
-
-`application`: is your service name, in my example, `application` = `producer-helloworld-service`
-
-I define `profile` as environment: `dev`, `qa`,`uat`,`prod`
-
-`label` usually is version
-
-I will use `yml` as config file format.
+service name: producer-helloworld-service \
+application config file at config server: producer-helloworld-service.yml
 
 
-The config files need to be put in `git`, it could be put as `per repo per application(service)` or `per repo per profile`.
+
+
+### Set up Git Repository as backend for config server
+In this approach, The config files will be put in a **_separate_** git repo!, it could be put as `per repo per application(service)` or `per repo per profile`.
 
 I prefer `per repo per profile`, that means I will have 4 git `repo`(per report per profile): `dev`,`qa`,`uat`,`prod`
 
 The detail information: https://cloud.spring.io/spring-cloud-config/multi/multi__spring_cloud_config_server.html
 
-### Set up Git Repository as backend for config server
 
 ### Set up File System as backend for config server
 You also can put config into the local, so you don't need those git repo. but you need to start config server as `native`
@@ -82,9 +71,34 @@ management:
 
 2.copy config-repo to your `resources` folder
 
-3.Start your config server as 
-~~~bash
-java -jar build/libs/configserver-0.0.1-SNAPSHOT.jar --spring.profiles.active=native
-~~~
+### How server find your yml file?
+
+Once complete the config, start the server, then go to http://localhost:9001/producer-helloworld-service/dev
+
+you can see the structure of restful path is different as the config file in file system. Depends on how you set up the config file structure, the query path will be different, following are some structures that Spring suggest.
+
+here is the config files on my local file system:
+
+![Picture 1](https://r0ngsh3n.github.io/static/img/0902/pic1.PNG)
+
+```
+/{application}/{profile}[/{label}] 
+/{application}-{profile}.yml
+/{label}/{application}-{profile}.yml
+/{application}-{profile}.properties
+/{label}/{application}-{profile}.properties
+```
+
+
+`application`: is your service name, in my example, `application` = `producer-helloworld-service`
+
+I define `profile` as environment: `dev`, `qa`,`uat`,`prod`
+
+`label` usually is version, I don't have `label` here.
+
+So, obviously, I am using the first structure which I think more most of sense. 
+
+I will use `yml` as config file format.
+
 
 ## Spring Config Client
