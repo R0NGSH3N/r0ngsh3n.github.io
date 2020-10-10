@@ -77,6 +77,7 @@ Once complete the config, start the server, then go to http://localhost:9001/pro
 
 you can see the structure of restful path is different as the config file in file system. Depends on how you set up the config file structure, the query path will be different, following are some structures that Spring suggest.
 
+
 here is the config files on my local file system:
 
 ![Picture 1](https://r0ngsh3n.github.io/static/img/0902/pic1.PNG)
