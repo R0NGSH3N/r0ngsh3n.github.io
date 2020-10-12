@@ -17,6 +17,7 @@ Spring official site: https://spring.io/projects/spring-cloud-config
 There are 2 parts of Spring Cloud Config
 
 1.`Config Server` - where all the configuration of the service at
+
 2 `Config Client` - plug into each service that help service to retrieve configuration from server.
 
 ## Spring Cloud family: 
