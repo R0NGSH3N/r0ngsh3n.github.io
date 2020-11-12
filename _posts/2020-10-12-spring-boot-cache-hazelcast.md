@@ -157,6 +157,7 @@ public class HazelCastEventDataSerializableFactory implements DataSerializableFa
     }
 }
 ~~~
+
 `FACTORY_ID` is the id used by object in entity object (see below) and `HAZELCAST_EVENT_ID` used by factory to create new entity object instance.
 
 #### 3.2 Let your model/pojo object implements `IdentifiedDataSerializable`
