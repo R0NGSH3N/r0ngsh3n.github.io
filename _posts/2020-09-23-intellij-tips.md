@@ -6,6 +6,12 @@ categories: common
 ---
 Tips of using Intellij IDEA, update continue....
 
+## Open recent file:  `Double Shift`
+
+## Expanding your selection
+
+select any line of code, keep click `Ctrl + w`, you will see the highlight/selection expand gradually.
+
 ## IdeaVim
 
 multi lines indent: `Shift + v Shift + >`
