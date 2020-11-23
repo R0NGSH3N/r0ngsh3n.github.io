@@ -25,6 +25,8 @@ implementation 'org.springframework.boot:spring-boot-start-webflux'
 
 ## 1. Create Instance of WebClient
 
+### 1.1 Three ways to create WebClient instance
+
 ~~~java
 WebClient webClient = new WebClient.create();
 ~~~
@@ -45,13 +47,76 @@ WebClient webClient = WebClient.builder()
          .build();
 ~~~
 
-in the `builder` mode, you can add `defaulHeader` and other information to the WebClient. 
+in the `builder` mode, you can add `defaulHeader` and other information to the WebClient.
+
+### 1.2 Insert `filter()` to log, modify the request and response
+
+Inject `ExchangeFilterFunction` during the building to intercept the request, you can use this functio to log the request or modify them:
+
+with lambda version:
+
+~~~java
+WebClient client = WebClient.builder()
+        .filter((request, next) -> {
+
+            logger.info("Request {} : {}", request.method(), request.url());
+
+            return next.exchange(request);
+        })
+        .build();
+~~~
+
+with method:
+
+~~~java
+WebClient client = WebClient.builder()
+        .filter(logRequest())
+        .build();
+
+private ExchangeFilterFunction logRequest(){
+    return (request, next) -> {
+            logger.info("Request {} : {}", request.method(), request.url());
+
+            return next.exchange(request);
+    };
+}
+~~~
+
+If you want to modify the request, you need use `ClientRequest` class to extract the request:
+
+~~~java
+WebClient client = WebClient.builder()
+        .filter((request, next) -> {
+
+            ClientRequest filtered = ClientRequest.from(request)
+                    .header("foo", "bar")
+                    .build();
+
+            return next.exchange(filtered);
+        })
+        .build();
+~~~
+
+the above example show the intercept the request and add attribution to the header.
+
+### 1.3 Intecept the response
+
+use `ofResponseProcessor()` factory pattern to create response filters:
+
+~~~java
+WebClient client = WebClient.builder()
+        .filter( response -> {
+            logger.info("Response status {}", response.statusCode());
+            return mono.just(response);
+        }
+        .build();
+~~~
 
 ## 2. Send Request by `get()` or `post()`
 
 use `get()` or `post()` to use different HTTP methods.
 
-## 3. Define `header`
+## 3. Attach `header`
 
 You can define `defaultHeader` when you create webClient, you also can attache the `defaultHeader` after `get()` or `post()` method by use `header()` method:
 
@@ -64,9 +129,9 @@ webClient.get()
 
 This insert a token in the header for authorization.
 
-## 4. Define `body`
+## 4. Attach `body`
 
-###  4.1 Type of Request/Response Body
+### 4.1 Type of Request/Response Body
 
 WebFlux is part of `Project Reactor`, it is non-blocking, asynchronous framework. Since it is Asychronous, so response back from Server could be 0, 1 till n. So Spring WebFlux provide following 2 type of object to wrap the response:
 
@@ -91,29 +156,26 @@ webClient.post().uri("").body(Mono.just(OBJECT_INSTANCE_VARIABLE), YOUR_OBJECT.c
 
 `retrieve()` is the method to handle response, and after retreive, we use `bodyToMono` method 
 
-
-## Handle Response by `retrieve()` or `exchange()`
-
-After you send the request to server, you need to see the response, there are 2 ways to handle: `retrieve()` is simpler, if you want to more control on response, then you can use `exchange()` method.
-
-### 4.2 3 ways to define `body`
+### 4.2 Three ways to define `body`
 
 a. use `.body()`
+
 ~~~java
 webClient.post().uri("").body(Mono.just(OBJECT_INSTANCE_VARIABLE), YOUR_OBJECT.class)
 ~~~
 
-This is normal way 
+This is normal way.
 
-b. use `syncBody()`
+b. use `syncBody()` (Deprecated)
 
 This is shortcut version of `body()`, if you just have 1 object to send, you can use following format:
 
-~~~java 
+~~~java
 webClient.post().uri("").syncBody(OBJECT_INSTANCE_VARIABLE)
 ~~~
 
-c. use `BodyInserteres` class to create `BodyInserter` and then pass it in `body()`, this is for those `FormData`, `MultipartData` (file upload) those special
-~~~java
+c. use `BodyInserteres` class to create `BodyInserter` and then pass it in `body()`, this is for those `FormData`, `MultipartData` (file upload) those special.
 
-~~~
+## 5. Handle Response by `retrieve()` or `exchange()`
+
+After you send the request to server, you need to see the response, there are 2 ways to handle: `retrieve()` is simpler, if you want to more control on response, then you can use `exchange()` method. `exchange()` provide full access to repsonse's headers and body.
