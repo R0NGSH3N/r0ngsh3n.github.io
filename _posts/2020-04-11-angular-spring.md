@@ -48,30 +48,13 @@ ng version
 
 **Where to create Angular project in spring boot?**
 
-Spring boots load web application from following default directory:
+You can create your angular source folder any where, but the compiled code **MUST** be put in where spring boot can find, there are 2 places you can drop your compiled angular code:
 
-if you pack your angular project as jar, then:
-
-`/static`,
-
-`/public`,
-
-`/resources`,
-
-`/META-INF/resources`
-
-if you don't pack the angular project, Spring boot will run the angular application from
-
-`src/main/webapp`
-
-What we are saying here is:
-
-1. run the Angular project with spring boot in `src` folder, this you need to spring boot look up in `src/main/webapp`, this method you don't need gradle, it is good for coding phase.
-
-2. Integrate Angular project with spring boot build. you need add angular build method in gradle, so when you `jar` or `bootJar` your spring boot project, _you can have angular project package with the spring boot project_.
+## First in `src/main/webapp`: run the Angular project with spring boot in `src` folder, this you need to spring boot look up in `src/main/webapp`, this method you don't need gradle, it is good for developing phase
 
 
-Then in this case, you need to use IDE's `run as java applicaion' on SpringBoot Application class, then you can drop your angular files over here, otherwise your angular files will be ignored.
+
+In this case, you need to use IDE's `run as java applicaion` on SpringBoot Application class, then you "output" your angular files over here, otherwise your angular files will be ignored.
 
 **Basically, you can put your angular project any where, but you need to change the `outputPath` setting in `angular.json` file to let the complied code output to `src/main/webapp` folder**
 
@@ -93,6 +76,33 @@ since my angular project is in `src/main/static/my-app`, so the `webapp` folder 
 ~~~bash
 /src/main/resources/static
 ~~~
+
+## Second Method: When you run your applicaiton with `bootRun` or you want to pack the angular project into your spring boot project, you need
+
+`/static`,
+
+`/public`,
+
+`/resources`,
+
+`/META-INF/resources`
+In this case, you need update `build.gradle` file that will inform gradle when run the packing job, it will compile the angular project first. Update `build.gradle` file as following:
+
+1. Add `com.moowork.node` plug:
+
+~~~groovy
+plugins {
+    id 'org.springframework.boot' version '2.3.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+    id "io.freefair.lombok" version "5.3.0"
+    id "com.moowork.node" version "1.3.1"
+}
+~~~
+
+2. Add Nodejs dependency:
+
+3. 
 
 run the create angular command:
 
