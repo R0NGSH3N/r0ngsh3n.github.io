@@ -7,6 +7,12 @@ categories: common
 
 `WebClient` is asynchronous/non-blocking HTTP Client, it is replacement of `RestTemplate`, Here we walk through how to create and use `webClient`.
 
+## Add Dependency
+
+~~~groovy
+implementation 'org.springframework.boot:spring-boot-start-webflux'
+~~~
+
 The Steps for `WebClient` to send request and receive response is following:
 
 1. Create `WebClient` instance
@@ -16,12 +22,6 @@ The Steps for `WebClient` to send request and receive response is following:
 5. Attach the `retrieve` or `exchange` method if you want handle response
 6. Attach `onStatus` to handle `404` or `500` error
 7. Attach the `subscriber` to the `bodyToXXX` method, the webFlux is asynchronous method, so we need subsriber to handle the object asychronously.
-
-## Add Dependency
-
-~~~groovy
-implementation 'org.springframework.boot:spring-boot-start-webflux'
-~~~
 
 ## 1. Create Instance of WebClient
 
@@ -57,7 +57,7 @@ You can define `defaultHeader` when you create webClient, you also can attache t
 
 ~~~java
 webClient.get()
-         .uri("/user/repos")
+         .uri("")
          .header("Authorization", "Basic " + Base64Utils
                   .encodeToString((username + ":" + token).getBytes(UTF_8)))
 ~~~
