@@ -12,8 +12,8 @@ Environment:
 
 - OS: Linux OS 20.04
 - NodeJS: v10.19.0
-- NPM: 6.14.4 
-- Angular: 
+- NPM: 6.14.4
+- Angular:
 
 ***
 
@@ -53,7 +53,6 @@ You can create your angular source folder any where, but the compiled code **MUS
 ## First in `src/main/webapp`: run the Angular project with spring boot in `src` folder, this you need to spring boot look up in `src/main/webapp`, this method you don't need gradle, it is good for developing phase
 
 
-
 In this case, you need to use IDE's `run as java applicaion` on SpringBoot Application class, then you "output" your angular files over here, otherwise your angular files will be ignored.
 
 **Basically, you can put your angular project any where, but you need to change the `outputPath` setting in `angular.json` file to let the complied code output to `src/main/webapp` folder**
@@ -86,25 +85,22 @@ since my angular project is in `src/main/static/my-app`, so the `webapp` folder 
 `/resources`,
 
 `/META-INF/resources`
-In this case, you need update `build.gradle` file that will inform gradle when run the packing job, it will compile the angular project first. Update `build.gradle` file as following:
 
-1. Add `com.moowork.node` plug:
+in this case, you change `angular.json` file, and update the `outputPath` as following:
 
-~~~groovy
-plugins {
-    id 'org.springframework.boot' version '2.3.5.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
-    id 'java'
-    id "io.freefair.lombok" version "5.3.0"
-    id "com.moowork.node" version "1.3.1"
-}
+~~~json
+"architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "../../static",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
 ~~~
-
-2. Add Nodejs dependency:
-
-3. 
-
-run the create angular command:
 
 ~~~bash
 ng new my-app
@@ -115,4 +111,3 @@ After the command run, the full structure of Angular folder will be like this:
 ![Picture 1](https://r0ngsh3n.github.io/static/img/0411/angular-project-structure.png)
 
 After click 2 `y`, 1 for strict mode, 1 for add angular router, and choose the CSS/SASS/LESS style then you should find `my-app` directory created under the `static` folder.
-
