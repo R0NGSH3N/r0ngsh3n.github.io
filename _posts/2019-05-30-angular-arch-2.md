@@ -192,36 +192,3 @@ if there is error, the `gender` String is can be capture in the `hasError('gende
 This is the benefit for creating `Model-driven` form, that creating forma and validating form are in ts file not in html file.
 
 the `onSubmit` method is linked to `submit` button on the form.
-
-4. Create Form in html file: `person-form.component.html`
-
-~~~html
-<header>
-    <h2>Add New Person</h2>
-</header>
-<form [formGroup]="personForm" (ngSubmit)="onSubmit(personForm.value)">
-    <ul>
-        <li>
-            <label for="id">Id</label>
-            <input type="text" name="id" id="id" formControlName="id">
-        </li>
-        <li>
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" formControlName="name">
-            <div *ngIf="personForm.get('name').hasError('pattern')">your name is not valid</div>
-        </li>
-        <li>
-            <label for="gender">Gender</label>
-            <input type="text" name="gender" id="gender" formControlName="gender">
-            <div *ngIf="personForm.get('gender').hasError('gender')">You only can use male or female</div>
-        </li>
-    </ul>
-    <button type="submit" [disabled] = "!personForm.valid">Save</button>
-</form>
-~~~
-
-in the `<form>`, we add 2 directives: `formGroup` and `ngSubmit`, the `formGroup` directive match the formGroup define in ts file : `peronForm`. `ngSubmit` for submit form. the `name` attribute for `input` tag are matched in the ts file.
-
-Notice here we have `disabled` directive used here, that means if the form is not valid (if there is any validator validate fail), then this button will "grey" out until all the field is valid.
-
-In here, there is 2 "div" elements in `name` and `gender` inputs, that are used to display the error message, so the logic is, if the `personForm` - the `formGroup`  get `formControl` which here are `name` and `gender`, if their `Validator` functions (one use build-in, one use customize) `hasError`, then display those error message.
