@@ -29,50 +29,21 @@ you also can customize the pipe, say that we want to create `<header>` to list a
 ng g pipe genderpipe
 ~~~
 
-2. in the `genderpipe.pipe.ts` file:
+3. add the `genderpipe` into the list html page:
 
-~~~javascript
-import { Pipe, PipeTransform } from '@angular/core';
-
-@Pipe({
-  name: 'genderpipe'
-})
-export class GenderpipePipe implements PipeTransform {
-
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
-  }
-
-}
+~~~html
+<header>
+    <div>{{ persons | genderpipe }}</div>
+</header>
+<div *ngFor="let person of persons">
+    <div [appGender] = "person.gender">
+    <app-show-person  
+        (changeName)="onNameChange($event)" 
+        [person]="person">
+    </app-show-person>
+    </div>
+</div>
 ~~~
-
-the `@Pipe` decorator has 2 inputs: `name` and `pure`, `pure` define if the pipe is stateful or stateless, most of time, `pipe` is stateless, and it is default so could be ignore.
-
-the `pipe` need to implements `PipeTransform` interface and use `transform` method, the first parameter is the input value, and rest of parameter(s) are the paramters. We need person list as input value, and we don't need parameters to format the value.
-
-We need to find the **unique** gender for each `person` object and return string like `male, female`, so we loop the list and find unique gender 
-
-~~~javascript
-import { Pipe, PipeTransform } from '@angular/core';
-
-@Pipe({
-  name: 'genderpipe'
-})
-export class GenderpipePipe implements PipeTransform {
-
-  transform(persons, ...args: unknown[]): string{
-    const genders = [];
-    persons.forEach( element => {
-        if(genders.indexOf(element.gender) <= -1){
-          genders.push(element.gender);
-        }
-    });
-
-    return genders.join(', ');
-  }
-}
-~~~
-
 
 ## 7. Form
 
