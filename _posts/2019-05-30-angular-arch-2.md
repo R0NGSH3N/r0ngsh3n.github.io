@@ -7,6 +7,20 @@ categories: common
 
 ## 6. Pipe
 
+Pipe used to transform or format the value, the format is:
+
+"{{ value | pipe_name: input paramenter1: input paramter 2 | pipe_name2}}"
+
+eg we want to format the name and slice only show 5 charactors and upcase:
+
+
+you also can customize the pipe, say that we want to create `<header>` to list all the `genders` for person object (we have 2: male/female). we can use `pipe` to easy achive this.
+
+1. generate pipe by using angular cli
+
+~~~bash
+ng g pipe genderpipe
+~~~
 
 2. in the `genderpipe.pipe.ts` file:
 
