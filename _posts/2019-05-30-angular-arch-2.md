@@ -16,7 +16,6 @@ eg we want to format the name and slice only show 5 charactors and upcase:
 ~~~html
 <p>
     <li>id: {{ person.id}}</li>
-    <li *ngIf="some.name">name: {{ some.name | slice: 0:4 | uppercase}}</li>
     <li>gender: {{ person.gender}}</li>
 </p>
 ~~~
