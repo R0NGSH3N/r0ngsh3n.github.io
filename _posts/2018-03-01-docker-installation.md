@@ -4,6 +4,9 @@ title: Install docker on Ubuntu
 tags: Windows 10, WSL 2, Ubuntu, Docker CE 
 categories: common
 ---
+
+## Install Docker
+
 Official Guide: https://docs.docker.com/engine/install/ubuntu/
 
 Following are the steps(assume you have ubuntu installed on WSL):
@@ -71,3 +74,26 @@ Following are the steps(assume you have ubuntu installed on WSL):
     ~~~bash
     docker run hello-world
     ~~~
+
+## Install MySQL docker Image
+
+1. pull mysql image from docer hub:
+
+   ~~~bash
+   sudo docker pull mysql 
+   ~~~
+
+2. verfiy the mysql docker image pulled
+
+    ~~~bash
+    docker images
+    ~~~
+
+3. Create persistent data storage and start the service in docker
+
+    ~~~bash
+    sudo mkdir /var/lib/mysql -p
+    sudo docker run -d --name mysql-server -p 3306:3306 -v /var/lib/mysql:/var/lib/mysql -e "MYSQL_ROOT_PASSWORD=123" mysql
+    ~~~
+
+4. Use any mysql client to connect "127.0.0.1:3306" with password "123" to verify the server install successful.
