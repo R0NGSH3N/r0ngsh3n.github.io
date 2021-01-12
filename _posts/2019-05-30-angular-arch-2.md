@@ -13,6 +13,13 @@ Pipe used to transform or format the value, the format is:
 
 eg we want to format the name and slice only show 5 charactors and upcase:
 
+~~~html
+<p>
+    <li>id: {{ person.id}}</li>
+    <li *ngIf="person.name">name: {{ person.name | slice: 0:4 | uppercase}}</li>
+    <li>gender: {{ person.gender}}</li>
+</p>
+~~~
 
 you also can customize the pipe, say that we want to create `<header>` to list all the `genders` for person object (we have 2: male/female). we can use `pipe` to easy achive this.
 
