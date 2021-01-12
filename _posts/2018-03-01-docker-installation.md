@@ -97,3 +97,66 @@ Following are the steps(assume you have ubuntu installed on WSL):
     ~~~
 
 4. Use any mysql client to connect "127.0.0.1:3306" with password "123" to verify the server install successful.
+
+## Load csv file into MySQL
+
+1. Install pip3
+
+    ~~~bash
+    sudo apt update
+    sudo apt install python3-pip
+    export PATH="$HOME/.local/bin:$PATH"
+    ~~~
+
+2. Install `csvsql` and `PyMySQL`
+
+    ~~~bash
+    pip3 install csvkit
+    pip3 install PyMySQL
+    ~~~
+
+3. Use `csvsql` tool to pipe in the csv file into mysql WITHOUT CREATING TABLE
+
+    ~~~bash
+   csvsql --db mysql+pymysql://root:123@localhost:3306/Test --tables HNPQCountry --insert HNPQCountry.csv
+   ~~~
+
+4. If you wanto control the data type, then import the data, you can use `csvsql` to generate table creation sql:
+
+    ~~~bash
+    csvsql --dialect mysql HNPQCountry.csv > /tmp/createTable.sql
+    cat /tmp/createTable.sql
+    CREATE TABLE `HNPQCountry` (
+        `Country Code` VARCHAR(3) NOT NULL, 
+        `Short Name` VARCHAR(30) NOT NULL, 
+        `Table Name` VARCHAR(30) NOT NULL, 
+        `Long Name` VARCHAR(73) NOT NULL, 
+        `2-alpha code` VARCHAR(2), 
+        `Currency Unit` VARCHAR(42) NOT NULL, 
+        `Special Notes` VARCHAR(939), 
+        `Region` VARCHAR(26) NOT NULL, 
+        `Income Group` VARCHAR(19) NOT NULL, 
+        `WB-2 code` VARCHAR(2), 
+        `National accounts base year` VARCHAR(50), 
+        `National accounts reference year` VARCHAR(9), 
+        `SNA price valuation` VARCHAR(36), 
+        `Lending category` VARCHAR(5), 
+        `Other groups` VARCHAR(9), 
+        `System of National Accounts` VARCHAR(61), 
+        `Alternative conversion factor` VARCHAR(18), 
+        `PPP survey year` BOOL, 
+        `Balance of Payments Manual in use` VARCHAR(33), 
+        `External debt Reporting status` VARCHAR(11), 
+        `System of trade` VARCHAR(20), 
+        `Government Accounting concept` VARCHAR(31), 
+        `IMF data dissemination standard` VARCHAR(51), 
+        `Latest population census` VARCHAR(166) NOT NULL, 
+        `Latest household survey` VARCHAR(77), 
+        `Source of most recent Income and expenditure data` VARCHAR(88), 
+        `Vital registration complete` VARCHAR(48), 
+        `Latest agricultural census` VARCHAR(130), 
+        `Latest industrial data` DECIMAL(38, 0), 
+        `Latest trade data` DECIMAL(38, 0), 
+        CHECK (`PPP survey year` IN (0, 1))
+    );
+    ~~~
