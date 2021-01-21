@@ -42,8 +42,8 @@ categories: common
 
     Type `zsh` in terminal, you will see screen like this:
 
-    ![picture1] (https://r0ngsh3n.github.io/static/img/1215/2021-01-21_10-10.png)
+![picture 1](https://r0ngsh3n.github.io/static/img/1215/2021-01-21_10-10.png)
 
-    after set of question & selection, you will have terminal like this:
+after set of question & selection, you will have terminal like this:
 
-    ![picture1] (https://r0ngsh3n.github.io/static/img/1215/2021-01-21_10-20.png)
+![picture2](https://r0ngsh3n.github.io/static/img/1215/2021-01-21_10-20.png)
