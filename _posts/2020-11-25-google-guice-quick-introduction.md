@@ -47,12 +47,46 @@ Here is how to do in Guice:
 
 SampleJobConfig
 
-~~~Java
+~~~java
 public class SampelJobConfig extends AbstractModule{
       @Override
       protected void configure() {
             bind(Extractor.class).to(DBDataExtractor.class);
       }
+}
+~~~
+
+JobRunner
+
+~~~java
+@Getter
+public class JobRunner<T> {
+
+    private JobConfig jobConfig;
+    private Extractor<T> extractor;
+    private Loader<T> loader;
+    private Transformer<T> transformer;
+
+    @Inject
+    public void setExtractor(Extractor extractor){
+        this.extractor = extractor;
+    }
+    public JobRunner(JobConfig jobConfig){
+        this.jobConfig = jobConfig;
+    }
+
+    public void run(T target){
+        JobContext<T> jobContext = new JobContext<>();
+        jobContext.setTarget(target);
+        this.extractor.extract(jobContext);
+        this.transformer.tranform(jobContext);
+        this.loader.load(jobContext);
+    }
+
+    public static void main(String args[]){
+
+    }
+
 }
 ~~~
 
