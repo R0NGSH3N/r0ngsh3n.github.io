@@ -9,7 +9,7 @@ Google Guice is light way DI framework, I recently worked on Spark, so can't use
 
 Following is the picture to display what I want to do:
 
-![Guice Class Diagram](../static/img/1125/guice-class-diagram.png)
+![Guice Class Diagram](https://r0ngsh3n.github.io/static/img/1125/guice-class-diagram.png)
 
 So we design ETL tool, and ETL tool need `Extractor` to extrate data from either CSV file or database, and when we assemble our job, we need binding one of the extractor to the `SampleJobRunner` and then give to `SparkETLApplication` the main class to run.
 
