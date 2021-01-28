@@ -160,3 +160,13 @@ Following are the steps(assume you have ubuntu installed on WSL):
         CHECK (`PPP survey year` IN (0, 1))
     );
     ~~~
+
+## Make Spark Docker image
+
+Github has official Dockerfile that we can use to make customized image: [Offical Spark Docker File](https://github.com/apache/spark/blob/master/resource-managers/kubernetes/docker/src/main/dockerfiles/spark/Dockerfile)
+
+
+
+
+
+

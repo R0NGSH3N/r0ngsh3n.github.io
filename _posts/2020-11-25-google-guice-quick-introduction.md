@@ -7,7 +7,7 @@ categories: common
 
 Google Guice is light way DI framework, I recently worked on Spark, so can't use spring framework, so I use Google Guice to replicate the spring DI, I will show both Spring config and Google Guice to compare both.
 
-Following is the picture to display what I want to do:
+Following is the picture to display what I need:
 
 ![Guice Class Diagram](https://r0ngsh3n.github.io/static/img/1125/guice-class-diagram.png)
 
@@ -42,6 +42,8 @@ public class SampelJobConfig{
     }
 }
 ~~~
+
+## Basic of Basic - extends from `AbstractModule`
 
 Here is how to do in Guice:
 
@@ -101,5 +103,24 @@ public final class SimpleSparkEtlJobApplication {
         Injector injector = Guice.createInjector(new SampleJobConfig());
         JobRunner jobRunner = injector.getInstance(JobRunner.class);
         jobRunner.run();
+    }
+~~~
+
+## Implement `Module`
+
+extends from `AbstractModule` with `bind` command is not flexible, I want to have binding happen in `SimpleSparkEtlApplication` component:
+
+1. Initial all the `SampleJobConfig` in the `SimpleSparkEtlApplication`
+2. bind `SampleJobConfig` to the `JobRunner`.
+3. Take care of the generic Type.
+
+## Provides vs Bind
+
+If your instance can not be instantiate with `bind`, then you can use `Provides` annotation 
+
+~~~java
+    @Override
+    protected void configure() {
+        this.bind(Extractor.class).to(DBDataExtractor.class);
     }
 ~~~
