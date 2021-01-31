@@ -106,7 +106,7 @@ public final class SimpleSparkEtlJobApplication {
     }
 ~~~
 
-## Implement `Module`
+## Implement Module Interface
 
 extends from `AbstractModule` with `bind` command is not flexible, I want to have binding happen in `SimpleSparkEtlApplication` component:
 
@@ -116,7 +116,7 @@ extends from `AbstractModule` with `bind` command is not flexible, I want to hav
 
 ## Provides vs Bind
 
-If your instance can not be instantiate with `bind`, then you can use `Provides` annotation 
+If your instance can NOT be instantiate with `bind`, then you can use `Provides` annotation 
 
 ~~~java
     @Override
