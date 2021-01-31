@@ -75,3 +75,23 @@ Second way is much simpler, but not easy to understand, but general idea is firs
 
     }
 ~~~
+
+here I used 
+
+~~~java
+    ExecutorService executorService = Executors.newFixedThreadPool(Math.min(list.size(), 1000));
+~~~
+
+to calculate the max threads that process need, it is ***dangerous*** to use executor service without calculation, you should use following formula to calculate how many threads you need:
+
+T = N * u * (1 + E / C)
+
+T: Total Threads
+
+N: number of cores
+
+u: expected usage rate for CPU
+
+E: waiting time
+
+C: expected caculation time
