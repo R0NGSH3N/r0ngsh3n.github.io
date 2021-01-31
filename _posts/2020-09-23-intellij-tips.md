@@ -6,6 +6,7 @@ categories: common
 ---
 Tips of using Intellij IDEA, update continue....
 
+
 ## Open recent file:  `Double Shift`
 
 ## Expanding your selection
@@ -137,3 +138,11 @@ You can save your java file into favorite -- just like same as Chrome browser.
 `Ctrl + Alt + Shift + J` called "Select All Occurences" will provide you a batch edit on all those same word together.
 
 ## Use `Alt + Enter` == auto complete
+
+
+## IdeaVIM
+
+`gd` - go to definition
+`dg` - delete from current line to end of file
+`vip` - select current paragraph -- the paragraph is till next empty line
+`! external command` - run shell command - that works in IdeaVim too
