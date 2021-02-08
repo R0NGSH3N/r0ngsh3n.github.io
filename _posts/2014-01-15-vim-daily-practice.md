@@ -95,11 +95,19 @@ colorscheme alduin
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ~~~
 
-update `~/.vimrc`
+Add bunch of plugins in `~/.vimrc`, then run `:PluginInstall` to install them 
 
 ~~~bash
 
 ~~~
+
+### change the <leader> key to comma
+
+~~~bash
+let mapleader = ","
+~~~
+
+### Config NERDTree
 
 
 - `echom` and `echoe` - print message and error message, later can use `:message` to show all previous printed message.
