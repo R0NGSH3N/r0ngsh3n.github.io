@@ -95,10 +95,16 @@ colorscheme alduin
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ~~~
 
-Add bunch of plugins in `~/.vimrc`, then run `:PluginInstall` to install them 
+Add bunch of plugins in `~/.vimrc`, then run `:PluginInstall` to install them
 
 ~~~bash
-
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive' 
+Plugin 'airblade/vim-gitgutter' 
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
 ~~~
 
 ### change the <leader> key to comma
