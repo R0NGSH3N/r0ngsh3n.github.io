@@ -89,11 +89,12 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'                                                         
 Plugin 'scrooloose/nerdtree'                                                        
 Plugin 'scrooloose/nerdcommenter'                                                   
-Plugin 'bagrat/vim-buffet'                                                          
-Plugin 'vim-airline/vim-airline'                                                    
-Plugin 'vim-airline/vim-airline-themes'                                             
-Plugin 'easymotion/vim-easymotion'                                                  
-Plugin 'ryanoasis/vim-devicons'      
+Plugin 'bagrat/vim-buffet'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'JamshedVesuna/vim-markdown-preview;
 ~~~
 
 ### change the <leader> key to comma
@@ -119,6 +120,23 @@ let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1                                               
 let g:webdevicons_enable_airline_statusline = 1    
 ~~~
+
+## setup `vim-markdown-preview`
+
+install grip:
+
+~~~bash
+pip3 install grip
+~~~
+
+in .vimrc:
+
+~~~vimscript
+let vim_markdown_preview_github=1
+~~~
+
+then <c-p> to launch preview
+
 
 - `echom` and `echoe` - print message and error message, later can use `:message` to show all previous printed message.
 
