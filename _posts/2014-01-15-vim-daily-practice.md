@@ -14,72 +14,56 @@ sudo pacman -S gvim # arch
 sudo apt install vim-gnome #ubuntu
 ~~~
 
-### The config file is in `~/.vimrc`, basic config
+## Install Nerd Font
+
+Nerd font is required by couple of plug in (vim-devicon)
+
+1. Download font from [here](https://www.nerdfonts.com/font-downloads)
+
+2. Unzip and copy to ~/.fonts
+
+3. Run the command fc-cache -fv to manually rebuild the font cache
+
+4. run command fc-list | grep <fontName> to verify nerd font install correctly
+
+## Set Guifont
+
+if you are using neovim, then you need change the font of the terminal and then restart vim, if you use vim then you need to use 
 
 ~~~bash
-set nocompatible "not compatible with vi
-syntax enable·
-syntax on »· "set highlight
-set showmode»· "show it is n/i/v mode at the bottom
-set showcmd» "show incomplete command
-"set mouse=a » "enable mouse
-set encoding=utf-8
-set t_Co=256 » "set color 256
-
-" indent
-filetype indent on "based on different type of file, use different indent policy
-set autoindent   "autoindent
-set tabstop=2» "tab how many space vim show
-set shiftwidth=4 ">> << == 4 charactors
-set softtabstop=2 "tab=2space
-
-"set line number
-"set number
-set relativenumber "show the current line number and relative line number for other
-set cursorline    "draw line in current line
-
-"text
-set textwidth=80
-set nowrap
-set laststatus=2 "show status line
-"set linebreak "only break when not in word
-"set wrpmargin=2
-set scrolloff=5
-set ruler
-
-"search
-set showmatch "show match on parens
-set hlsearch  "set highlight on searh
-set incsearch "set incremental search
-set ignorecase smartcase
-
-"spelling
-set spell spelllang=en_us
-
-set nobackup noswapfile undofile "no backup
-set noerrorbells
-set visualbell
-set autochdir "change current work directory to the file current in edit
-
-set history=1000 "1000 history
-set autoread
-
-set list lcs=trail:·,tab:»· "listchars
-
-set wildmenu
-set wildmode=longest:list,full
-
-nnoremap :W :w
-nnoremap :Q :q
-"set line number relative or not
-nnoremap <c-l> : set relativenumber! set number! \| set number? set relativenumber? <CR>
-nnoremap <c-c> : set cursorline! \| set cursorline? <CR>
-
+:set guifont=JetBrains\ Mono\ Nerd\ Font:h10
 ~~~
+
+to implement the font
+
+## verify the font install correctly
+
+in vim :
+
+~~~bash
+:echo g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol
+~~~
+
+if you see the icon then you are fine, it you see some weird icon, then it is not.
+
+
+### The config file is in `~/.vimrc` or `~/.config/nvim/init.vim`, basic config
+
+my vim config is [here](https://raw.githubusercontent.com/R0NGSH3N/r0ngsh3n-vim/main/nvim/init.vim)
 
 ### set vim color pattern
 
 mkdir `~/.vim/colors`, copy the `*.vim` file into this folder, then update ~/.vimrc file:
+
+then copy the color vim file into the folder:
+
+~~~bash
+#neovim
+wget https://raw.githubusercontent.com/AlessandroYorba/Alduin/master/colors/alduin.vim -O ~/.config/nvim/colors/alduin.vim
+
+#vim:
+wget https://raw.githubusercontent.com/AlessandroYorba/Alduin/master/colors/alduin.vim -O ~/.vim/colors/alduin.vim
+~~~
 
 ~~~bash
 " color scheme
@@ -101,10 +85,15 @@ Add bunch of plugins in `~/.vimrc`, then run `:PluginInstall` to install them
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive' 
 Plugin 'airblade/vim-gitgutter' 
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
+Plugin 'jiangmiao/auto-pairs'                                                       
+Plugin 'tpope/vim-surround'                                                         
+Plugin 'scrooloose/nerdtree'                                                        
+Plugin 'scrooloose/nerdcommenter'                                                   
+Plugin 'bagrat/vim-buffet'                                                          
+Plugin 'vim-airline/vim-airline'                                                    
+Plugin 'vim-airline/vim-airline-themes'                                             
+Plugin 'easymotion/vim-easymotion'                                                  
+Plugin 'ryanoasis/vim-devicons'      
 ~~~
 
 ### change the <leader> key to comma
@@ -113,8 +102,23 @@ Plugin 'scrooloose/nerdcommenter'
 let mapleader = ","
 ~~~
 
-### Config NERDTree
+### NERDTree
 
+~~~bash
+noremap  <leader>t : NERDTreeToggle<CR>
+~~~
+
+"O" - expand all; "o" expand current node
+
+## activate `Vimdevicon`
+
+  Once install the vim-devicon, you need use following command to activate in .vimrc
+
+~~~vimscript
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1                                               
+let g:webdevicons_enable_airline_statusline = 1    
+~~~
 
 - `echom` and `echoe` - print message and error message, later can use `:message` to show all previous printed message.
 
