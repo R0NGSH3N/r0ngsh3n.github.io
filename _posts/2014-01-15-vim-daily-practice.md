@@ -14,7 +14,7 @@ sudo pacman -S gvim # arch
 sudo apt install vim-gnome #ubuntu
 ~~~
 
-## Install Nerd Font
+## Install and Config Nerd Font
 
 Nerd font is required by couple of plug in (vim-devicon)
 
@@ -26,7 +26,8 @@ Nerd font is required by couple of plug in (vim-devicon)
 
 4. run command fc-list | grep <fontName> to verify nerd font install correctly
 
-## Set Guifont
+
+### Set Guifont for Nerd Font
 
 if you are using neovim, then you need change the font of the terminal and then restart vim, if you use vim then you need to use 
 
@@ -36,7 +37,7 @@ if you are using neovim, then you need change the font of the terminal and then 
 
 to implement the font
 
-## verify the font install correctly
+### verify the font install correctly
 
 in vim :
 
@@ -47,7 +48,9 @@ in vim :
 if you see the icon then you are fine, it you see some weird icon, then it is not.
 
 
-### The config file is in `~/.vimrc` or `~/.config/nvim/init.vim`, basic config
+## Set up vimrc or init.vim file
+
+The config file is in `~/.vimrc` or `~/.config/nvim/init.vim`, basic config
 
 my vim config is [here](https://raw.githubusercontent.com/R0NGSH3N/r0ngsh3n-vim/main/nvim/init.vim)
 
@@ -73,7 +76,7 @@ colorscheme alduin
 
 ** I used color scheme called : alduin
 
-### install plugin managment tool : vundle
+### install plugin management tool : vundle
 
 ~~~bash
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -97,13 +100,13 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'JamshedVesuna/vim-markdown-preview;
 ~~~
 
-### change the <leader> key to comma
+### Map the \<leader\> key to comma
 
 ~~~bash
 let mapleader = ","
 ~~~
 
-### NERDTree
+### Config NERDTree
 
 ~~~bash
 noremap  <leader>t : NERDTreeToggle<CR>
@@ -111,7 +114,7 @@ noremap  <leader>t : NERDTreeToggle<CR>
 
 "O" - expand all; "o" expand current node
 
-## activate `Vimdevicon`
+### activate `Vimdevicon`
 
   Once install the vim-devicon, you need use following command to activate in .vimrc
 
@@ -121,7 +124,7 @@ let g:webdevicons_enable_nerdtree = 1
 let g:webdevicons_enable_airline_statusline = 1    
 ~~~
 
-## setup `vim-markdown-preview`
+### setup `vim-markdown-preview`
 
 install grip:
 
@@ -135,26 +138,53 @@ in .vimrc:
 let vim_markdown_preview_github=1
 ~~~
 
-then <c-p> to launch preview
+then \<c-p\> to launch preview
 
+### Set up coc.nvim
 
-- `echom` and `echoe` - print message and error message, later can use `:message` to show all previous printed message.
+1. Install nodejs
 
-- `se[t] number` | `se[t] nonumber` | `se[t] number!` | `se[t] number?` -- check which option is on
+    ~~~bash
+    curl -sL install-node.now.sh/lts | sudo bash
+    ~~~
 
-- `se[t] numberwidth=2` (default is 4)
+2. add following in vimrc/init.vim if you use vundle
 
-- `map <c-d> ddp` -- this map ctrl-d to `dd` and then `p`
-  `map _ ddkkp` -- this map _ to delete line and then go up 2 line and then paste
+    ~~~bash
+    Plugin 'neoclide/coc.nvim'
+    ~~~
 
-   nmap: (nnoremap) map in normal mode
-   vmap: (vnoremap) in visual mode
-   imap: (inoremap) map in insert mode: this could be use for intellij live template
-          imap soul System.out.println("");
-          imap <c-d> <esc>ddi : need <esc> to escape the insert mode then delete line
+    then resource and run `:PluginInstall`
 
-    VERY USEFUL: imap <c-u> <esc>viwU : convert a just finished type word to all upper case.
+3. Check health
 
-   nunmap U - unmap U in normal mode
+    run :checkhealth, if you see lot of `ok` then you should be fine.
+    run :CocInfo to see the information
 
-   use \*noremap!!!!!
+4. Install java
+
+    run :CocInstall coc-java
+
+5. Setup JAVA_HOME 
+
+    This is same step as set up for VS Code, the tricky thing is some time the
+    openjdk doesn't work. It complains that JAVA_HOME is not pointing to JDK
+
+    I downloaded oracle jdk and install fixed this issue. [Here](https://linuxhint.com/install_java_linux_mint/) is the
+    instruction how to install on linux mint.
+
+6. update the init.vim with coc.nvim config.
+
+    you can find the coc.nvim configuration [here](https://github.com/neoclide/coc.nvim#example-vim-configuration)
+
+    I didn't completely copy-paste since there are some keymaps are conflicting.
+
+7. Some useful shortcuts:
+
+    'gd' - goto declare. \<c-o\> come back
+    'gy' - goto class definition
+    'gi' - goto implement (from interface to concrete object)
+    'gr' - goto reference
+    '[g' - goto next error. ']g' - goto prev error
+    'K'  - show document of a class
+
