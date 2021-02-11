@@ -188,3 +188,25 @@ then \<c-p\> to launch preview
     '[g' - goto next error. ']g' - goto prev error
     'K'  - show document of a class
 
+
+### Setup ctags
+
+    Install ctags:
+
+    ~~~bash
+  sudo apt  install exuberant-ctags
+    ~~~
+
+    in your java project directory, run `ctags`
+
+    ~~~bash
+    ctags -R --languages=Java
+    ~~~
+
+    update `.vimrc` set:
+
+    ~~~bash
+    set tags=tags;/
+    ~~~
+
+
