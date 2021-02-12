@@ -207,3 +207,5 @@ update `.vimrc` set:
 ~~~bash
 set tags=tags;/
 ~~~
+
+### Setup ALE
