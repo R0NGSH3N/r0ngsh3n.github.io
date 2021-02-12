@@ -19,6 +19,7 @@ categories: common
     vim-exchange
     vim-highlightedyank
 
+~~~bash
 ## Split
 <leader>q - close content
 <leader>ps - split horizontal
@@ -68,4 +69,4 @@ visual mode: T - popup refactoring menu
 ,d - debug class
 ,t - run tests
 ,T - rerun failed Tests
-
+~~~
