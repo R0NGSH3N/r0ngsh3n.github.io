@@ -84,7 +84,6 @@ let cursor on the "some String" and then:
 `Ctrl + Alt + c` - extract the "some String" or variable into local constant
 
 `Ctrl + Alt + f` - extract the "some String" or variable into class member variable (name = "some String")
-
 `Ctrl + Alt + p` - extract the "some String" or variable into this method input parameter (name = "some String")
 
 `Ctrl + Alt + m` - extract the "some String" or variable or lines of code into method
@@ -146,3 +145,11 @@ You can save your java file into favorite -- just like same as Chrome browser.
 `dg` - delete from current line to end of file
 `vip` - select current paragraph -- the paragraph is till next empty line
 `! external command` - run shell command - that works in IdeaVim too
+`<C-]` - go to definition
+`<C-o>` - go back
+`\`\`` - go back to previous position
+`\`\.` - go back to previous update position
+`f` - search charactor to right of line, use `;` to continue
+`F` - search charactor to left of line, use `;` to continue
+`zc` - expand folding
+`zo` - collapse folding
