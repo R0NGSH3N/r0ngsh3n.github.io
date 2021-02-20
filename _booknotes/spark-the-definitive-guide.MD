@@ -103,7 +103,7 @@ Action collect data to native data object ??
 
 Action write source data.
 
-## Chapter 3
+## Chapter 3: a tour of spark toolset
 
 `Structured API`: Datasets, DataFrames and SQL
 `Low level API`: RDDs
@@ -125,3 +125,107 @@ number of partitions that should be created after a shuffle. remember `Partition
 ~~~scala
 spark.conf.set("spark.sql.shuffle.partitions", "5")
 ~~~
+
+Streaming read:
+
+~~~scala
+
+val streamingDataFrame = spark.readStream
+.schema(staticSchema)
+.option("maxFilesPerTrigger", 1)
+.format("csv")
+.option("header", "true")
+.load("/data/retail-data/by-day/*.csv")
+
+streamingDataFrame.isStreaming // returns true
+~~~
+
+The `action` for streaming is different as `sql`, 2 ways: write stream to memory table or dump to console:
+
+write to memory table:
+~~~scala
+purchaseByCustomerPerHour.writeStream
+.format("memory") // memory = store in-memory table
+.queryName("customer_purchases") // the name of the in-memory table
+.outputMode("complete") // complete = all the counts should be in the table
+.start()
+
+//then read by sql
+spark.sql("""
+SELECT *
+FROM customer_purchases
+ORDER BY `sum(total_cost)` DESC
+""")
+.show(5)
+~~~
+
+dump to console:
+~~~scala
+purchaseByCustomerPerHour.writeStream
+.format("console")
+.queryName("customer_purchases_2")
+.outputMode("complete")
+.start()
+~~~
+
+when to use RDDs? `seq()` data from memory in `pallarize` way:
+
+~~~scala
+spark.sparkContext.parallelize(Seq(1, 2, 3)).toDF()
+~~~
+
+## Chapter 4: Structured API Overview
+
+3 core structured APIs:
+
+- Datasets
+- DataFrames
+- SQL tables and views
+
+`Datasets` and `Dataframes` are immutable, `SQL table and views` basically same as `DataFrames`, different is we execute SQL on it.
+
+Difference between `DataFrames` and `Datasets`: 
+
+`DataFrames` is `untyped`
+`Datasets` is `typed`
+
+`Row` is used by `DataFrame`, it can created from:
+
+- SQL
+- RDDs
+- Data source
+
+Java Type mapping: page 62
+
+spark execution plan
+
+~~~
+user submit code -> unresolved logical plan -> resolved logical plan -> optimized logical plan -> physical plan 
+~~~
+
+the `logical plan` to `physical plan` is the key:
+
+![pic2](./spark-the-definitive-guide-pic2.png)
+
+it compare the different models before select one.
+
+## Chapter 5: Basic Structured Operations
+
+`DataFrames` : table
+`columns`: column in table
+`Schema`: table schema define name and type
+`Partitioning`: physical distribution of `DataFrames`
+`Partitioning Schmea`: define how `Partition` located.
+
+read json file
+~~~scala
+val df = spark.read.format("json")
+.load("/data/flight-data/json/2015-summary.json")
+~~~
+
+pring schme:
+~~~
+df.printSchema()
+~~~
+
+page 68 -- till
