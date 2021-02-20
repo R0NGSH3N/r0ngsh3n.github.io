@@ -103,5 +103,25 @@ Action collect data to native data object ??
 
 Action write source data.
 
+## Chapter 3
+
 `Structured API`: Datasets, DataFrames and SQL
 `Low level API`: RDDs
+
+run spark with `spark-submit` example:
+
+~~~scala
+/usr/local/spark-2.4.7-bin-hadoop2.7 # must in this folder
+spark-submit \
+--master localhost  \
+./examples/jars/spark-examples_2.11-2.4.7.jar 10
+~~~
+
+Dataset is `structured type` so not available in python and R
+
+Specify number of Partition: This configuration specifies the
+number of partitions that should be created after a shuffle. remember `Partition` and `executor` is 1-to-1 mapping, so if you don't have that much of `executor`, then you don't need that much of partition, in the book, the example say `take(5)`, so techinally it only need 5 partition and exeuctors.
+
+~~~scala
+spark.conf.set("spark.sql.shuffle.partitions", "5")
+~~~
