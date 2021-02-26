@@ -209,3 +209,32 @@ set tags=tags;/
 ~~~
 
 ### Setup ALE
+
+### Migrate to new machine
+
+1. Clone the config from github
+
+    ~~~bash
+    cd /tmp/
+    git clone https://github.com/R0NGSH3N/r0ngsh3n-vim.git 
+    ~~~
+
+2. Copy the config file:
+
+    ~~~bash
+    cd /tmp/
+    cp -r nvim ~/.config/
+
+    cp -r .vim ~/
+    ~~~
+
+3. Install `Vundle`
+
+    ~~~bash
+    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    ~~~
+
+4. Install all the plugins: inside the vim run `:PluginInstall`
+
+5. Don't forget copy the `Nerd Fonts`
+    
