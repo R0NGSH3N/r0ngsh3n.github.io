@@ -109,8 +109,6 @@ Action write source data.
 `Structured API`: Datasets, DataFrames and SQL
 `Low level API`: RDDs
 
-2/20/2021
-
 run spark with `spark-submit` example:
 
 ~~~scala
@@ -217,10 +215,15 @@ it compare the different models before select one.
 Core parts: 
 
 `DataFrames` : table
+
 `columns`: column in table **Important**
+
 `Rows`: row **Important**
+
 `Schema`: table schema define name and type 
+
 `Partitioning`: physical distribution of `DataFrames`
+
 `Partitioning Schmea`: define how `Partition` located.
 
 read json file
@@ -480,4 +483,72 @@ FROM dfTable LIMIT 1
 
 complex data type: page 117
 
-02/20/2021 page 124
+
+### Chapter 7 : Aggregation
+
+Keyword?
+
+- `groupBy` - yes
+- `window` ?
+- `grouping set` - bunch of `groupBy`
+- `rollup` ? - column `groupBy`
+- `cube` ?
+
+skip `rollup`, `cube` and `window` -> not necessary currently
+
+
+### Chapter 8 Joins
+
+~~~scala
+val person = Seq(
+(0, "Bill Chambers", 0, Seq(100)),
+(1, "Matei Zaharia", 1, Seq(500, 250, 100)),
+(2, "Michael Armbrust", 1, Seq(250, 100)))
+.toDF("id", "name", "graduate_program", "spark_status")
+~~~
+
+then use following command to copy-paste multiple line in `spark-shell`
+
+~~~scala
+scala> :paste
+// Entering paste mode (ctrl-D to finish)
+
+val person = Seq(
+(0, "Bill Chambers", 0, Seq(100)),
+(1, "Matei Zaharia", 1, Seq(500, 250, 100)),
+(2, "Michael Armbrust", 1, Seq(250, 100)))
+.toDF("id", "name", "graduate_program", "spark_status")
+
+// Exiting paste mode, now interpreting.
+
+person: org.apache.spark.sql.DataFrame = [id: int, name: string ... 2 more fields]
+
+~~~
+
+join need 2 step:
+
+1. create join Expression:
+    ~~~scala
+    val joinExpression = person.col("graduate_program") === graduateProgram.col("id")
+    ~~~
+
+2. use join expression on df:
+    ~~~scala
+    person.join(graduateProgram, joinExpression).show()
+    ~~~
+
+you can define the join type on join expression:
+
+~~~scala
+joinType = "outer" // could be "left_outer", "right_out"
+person.join(graduateProgram, joinExpression, joinType).show()
+~~~
+
+Two join Strategy that Spark use:
+
+- node-to-node communication strategy 
+- per node computation strategy
+
+based on the `big-table to big-table` or `big-table to small-table`
+
+02/25/2021
