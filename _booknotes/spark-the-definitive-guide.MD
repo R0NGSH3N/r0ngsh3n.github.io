@@ -551,4 +551,171 @@ Two join Strategy that Spark use:
 
 based on the `big-table to big-table` or `big-table to small-table`
 
-02/25/2021
+### Chapter 9: Data Source
+
+#### Read Data
+
+Basic format
+~~~scala
+DataFrameReader.format(...).option("key", "value").schema(...).load()
+~~~
+The `DataFrameReader` is from `spark.read` so above format can change to:
+
+~~~scala
+spark.read.format(...).option("key", "value").schema(...).load()
+~~~
+
+Basic Builder function:
+
+- format
+- schema
+- read mode
+- A series of options
+
+each of these functions return `DataFrameReader`, and then finally call `load()` to read data.
+
+#### Write Data
+
+basic format:
+
+~~~scala
+DataFrameWriter.format(...).option(...).partitionBy(...).bucketBy(...).sortBy(
+...).save()
+~~~
+
+`DataFrame.write()` provide the `DataFrameWriter` object above
+function are same as read
+
+#### CSV file
+
+all options see page 164
+
+#### JSON file
+
+Spark prefer `line-delimniter` JSON format option see page 167
+
+
+#### Parquet Format : column oriented file format
+
+***Spark prefer read/write in parquest file format***
+
+
+### SQL Database
+
+load JDBC connection jar in `spark-shell`
+
+~~~bash
+./bin/spark-shell \
+--driver-class-path postgresql-9.4.1207.jar \
+--jars postgresql-9.4.1207.jar
+~~~
+
+JDBC options page 176
+
+connect to database
+
+~~~scala
+val driver = "org.sqlite.JDBC"
+val path = "/data/flight-data/jdbc/my-sqlite.db"
+val url = s"jdbc:sqlite:/${path}"
+val tablename = "flight_info"
+~~~
+
+test connections
+
+~~~scala
+import java.sql.DriverManager
+val connection = DriverManager.getConnection(url)
+connection.isClosed()
+connection.close()
+~~~
+
+read data
+
+~~~scala
+val dbDataFrame = spark.read.format("jdbc").option("url", url)
+.option("dbtable", tablename).option("driver", driver).load()
+
+val pgDF = spark.read
+.format("jdbc")
+.option("driver", "org.postgresql.Driver")
+.option("url", "jdbc:postgresql://database_server")
+.option("dbtable", "schema.tablename")
+.option("user", "username").option("password","my-secret-password").load()
+~~~
+
+***Query Pushdown***
+
+This is spark performance tunning on sql, it will not fetch all the data 
+
+~~~scala
+//only pick 1 column
+dbDataFrame.select("DEST_COUNTRY_NAME").distinct().explain
+
+//pushedFilters
+dbDataFrame.filter("DEST_COUNTRY_NAME in ('Anguilla', 'Sweden')").explain
+~~~
+
+you can use `explain` to see the query.
+
+All above is you tell spark to tunning the SQL, but you can use `Query Pushdownn` to do it:
+
+***Instead of pass table, pass the Query*** => Query Pushdown
+
+~~~scala
+val pushdownQuery = """(SELECT DISTINCT(DEST_COUNTRY_NAME) FROM flight_info)
+AS flight_info"""
+val dbDataFrame = spark.read.format("jdbc")
+.option("url", url).option("dbtable", pushdownQuery).option("driver", driver)
+.load()
+dbDataFrame.explain()
+~~~
+
+*** Prevent Overhaul JDBC Connections***
+
+use `numPartitions` to prevent that:
+
+~~~scala
+val dbDataFrame = spark.read.format("jdbc")
+.option("url", url).option("dbtable", tablename).option("driver", driver)
+.option("numPartitions", 10).load()
+~~~
+
+*** user `Predicates` to specify data read from each physical partition*** 
+
+~~~scala
+// in Scala
+val props = new java.util.Properties
+props.setProperty("driver", "org.sqlite.JDBC")
+val predicates = Array(
+"DEST_COUNTRY_NAME = 'Sweden' OR ORIGIN_COUNTRY_NAME = 'Sweden'",
+"DEST_COUNTRY_NAME = 'Anguilla' OR ORIGIN_COUNTRY_NAME = 'Anguilla'")
+spark.read.jdbc(url, tablename, predicates, props).show()
+spark.read.jdbc(url, tablename, predicates, props).rdd.getNumPartitions // 2
+~~~
+
+that will be 2 partition each read 1 country.
+
+*** Becareful the `Predicates` MUST be `Disjoint` data, otherwise will be duplicates in different partitions***
+
+Partition based on a sliding window --- not quite understand page 179
+
+Read Data in Paralle: multiple executors can ***NOT*** read same file, you need to split and then
+exeuctor can read parallized.
+
+Write Data in Paralize: per partition per file
+
+Partitioning: write file in column fashion (parquet)
+Bucketing: Avoid the shuffle when you read data later.
+
+control the file size : ***DO NOT write small file*** cause many unnecessary mete-data file
+
+use this to control file size:
+
+~~~scala
+//5000 records per file
+df.write.option("maxRecordsPerFile", 5000)
+~~~
+
+2/26/2021 
+
