@@ -14,7 +14,11 @@ sudo pacman -S gvim # arch
 sudo apt install vim-gnome #ubuntu
 ~~~
 
+<<<<<<< HEAD
 ## Install and Config Nerd Font
+=======
+## Install Nerd Fonts
+>>>>>>> bae5567 (init)
 
 Nerd font is required by couple of plug in (vim-devicon)
 
