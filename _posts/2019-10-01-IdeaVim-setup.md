@@ -9,19 +9,19 @@ Daily Idea Vim Shortcuts Cheat Sheet:
 
 | shortcuts  | descriptions   |
 |---|---|
-| " " + L  | show recent location  |
-| " " + g  | go to Declaration|
-| " " + f  | show up search window with  `files` tab active |
-| " " + c  | show up search window with `class` tab active |
-| " " + s  | show up search window with `symbol` tab active |
-| ***" " + ;***  | ***list all methods and variables in current file*** |
-| " " + i  | goto implementation -- this is used on interface or abstract class |
-| " " + I  | pop `selectIn` window -- this window help to jump between different idea windows |
-| " " + e  | pop recent files -- different as switcher (Ctrl + tab)|
-| " " + t  | pop surround with window, I changed to vmap |
-| " " + T  | pop refactory this window, in visual mode |
-| " " + rr  | rename |
-| " " + rg  | pop generate window|
+| \<L\> + L  | show recent location  |
+| \<L\> + g  | go to Declaration|
+| \<L\> + f  | show up search window with  `files` tab active |
+| \<L\> + c  | show up search window with `class` tab active |
+| \<L\> + s  | show up search window with `symbol` tab active |
+| ***\<L\> + ;***  | ***list all methods and variables in current file*** |
+| \<L\> + i  | goto implementation -- this is used on interface or abstract class |
+| \<L\> + I  | pop `selectIn` window -- this window help to jump between different idea windows |
+| \<L\> + e  | pop recent files -- different as switcher (Ctrl + tab)|
+| \<L\> + t  | pop surround with window, I changed to vmap |
+| \<L\> + T  | pop refactory this window, in visual mode |
+| \<L\> + rr  | rename |
+| \<L\> + rg  | pop generate window|
 
 ## Set command you can use in IdeaVim: [link](https://github.com/JetBrains/ideavim/wiki/%22set%22-commands)
 
