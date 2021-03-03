@@ -165,6 +165,15 @@ Following are the steps(assume you have ubuntu installed on WSL):
 
 Github has official Dockerfile that we can use to make customized image: [Offical Spark Docker File](https://github.com/apache/spark/blob/master/resource-managers/kubernetes/docker/src/main/dockerfiles/spark/Dockerfile)
 
+1. download the Dockerfile
+
+    ~~~bash
+    wget https://raw.githubusercontent.com/apache/spark/master/resource-managers/kubernetes/docker/src/main/dockerfiles/spark/Dockerfile -O /tmp/Dockerfile
+    ~~~
+
+2. build image
+
+    
 
 
 

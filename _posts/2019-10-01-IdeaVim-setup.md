@@ -5,9 +5,27 @@ tags: Vim Intellij
 categories: common
 ---
 
-## Set command you can use in IdeaVim: [link](https://github.com/JetBrains/ideavim/wiki/%22set%22-commands)
-## Emulated Vim Plugins
+Daily Idea Vim Shortcuts Cheat Sheet:
 
+| shortcuts  | descriptions   |
+|---|---|
+| Space + L  | show recent location  |
+| Space + g  | go to Declaration|
+| Space + f  | show up search window with  `files` tab active |
+| Space + c  | show up search window with `class` tab active |
+| Space + s  | show up search window with `symbol` tab active |
+| ***Space + ;***  | ***list all methods and variables in current file*** |
+| Space + i  | goto implementation -- this is used on interface or abstract class |
+| Space + I  | pop `selectIn` window -- this window help to jump between different idea windows |
+| Space + e  | pop recent files -- different as switcher (Ctrl + tab)|
+| Space + t  | pop surround with window, I changed to vmap |
+| Space + T  | pop refactory this window, in visual mode |
+| Space + rr  | rename |
+| Space + rg  | pop generate window|
+
+## Set command you can use in IdeaVim: [link](https://github.com/JetBrains/ideavim/wiki/%22set%22-commands)
+
+## Emulated Vim Plugins
     
     vim-easymotion
     vim-surround
