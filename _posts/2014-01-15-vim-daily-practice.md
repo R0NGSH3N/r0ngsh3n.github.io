@@ -98,6 +98,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'JamshedVesuna/vim-markdown-preview;
+Plugin 'ycm-core/YouCompleteMe'
 ~~~
 
 ### Map the \<leader\> key to comma
@@ -207,5 +208,24 @@ update `.vimrc` set:
 ~~~bash
 set tags=tags;/
 ~~~
+
+### Setup `YouCompleteMe` plugin
+
+1. update `~/.config/nvim/init.nvim`: add Plugin 'ycm-core/YouCompleteMe' 
+
+2. install cmake
+
+~~~bash
+sudo apt install cmake
+~~~
+
+3. call `install.py`
+
+~~~bash
+cd /home/rongshen/.vim/bundle/YouCompleteMe
+python3 ./install.py --java-completer
+~~~
+
+4. restart nvim
 
 ### Setup ALE
