@@ -21,6 +21,9 @@ categories: common
 2. sudo subscription-manager refresh
 3. sudo subscription-manager attach --auto
 
-## Install Docker
+## Install & Set up Docker 
 
+~~~bash
 sudo yum install docker
+docker run hello-world
+~~~
