@@ -27,6 +27,7 @@ categories: common
    use \*noremap!!!!!
 
 -  repeat insertion:
+    0. i - insert mode
     1. `Ctrl+o` issue normal command without leaving insert mode
     2. 80 - number of repetition
     3. i - insert
