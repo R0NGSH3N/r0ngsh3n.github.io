@@ -25,3 +25,10 @@ categories: common
    nunmap U - unmap U in normal mode
 
    use \*noremap!!!!!
+
+-  repeat insertion:
+    1. `Ctrl+o` issue normal command without leaving insert mode
+    2. 80 - number of repetition
+    3. i - insert
+    4. type the charactors you want to repetition insert
+    5. `Esc` - leave the insert mode
