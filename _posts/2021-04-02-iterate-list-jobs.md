@@ -34,26 +34,35 @@ This list of config get initialized in the construction:
 //        Lock lock = locks.apply(simpleSparkEtlJobConfig);
 
         try {
-            log.info("start watching folder... {}", Thread.currentThread().getName());
+            log.info("start the processors");
 
             while (running.get()) {
                 if (acquireLock(lock)) {
-                    List<Void> results = extractConfigDirectoryList.stream().map(sourceConfig -> CompletableFuture.runAsync(() -> {
+                    List<CompletableFuture<Void>> futures = extractConfigDirectoryList.stream().map(sourceConfig -> CompletableFuture.runAsync(() -> {
+                        runJob(sourceConfig);
+                    }, executorService)).collect(Collectors.toList());
 
-                        Function<String, CompletableFuture<String>> sparkSubmitter = createSparkProcessor();
-                        FileProcessor fileProcessor = new FileProcessor(sourceConfig, sparkSubmitter);
-                        fileProcessor.process();
-
-                    }, executorService)).map(CompletableFuture::join).collect(Collectors.toList());
-
+		    //wait for all the jobs to complete
+                    CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new)).join();
                     lock.unlock();
                 }
             }
 
         } finally {
+            log.info("run into finally. we are exiting the processor.");
             running.set(false);
             lock.unlock();
         }
+    }
+
+    @SneakyThrows
+    public void runJob(SimpleSparkEtlJobConfig.SourceConfig sourceConfig){
+        log.info("start directory monitoring job, directory: {}, Thread name: {}", sourceConfig.directory, Thread.currentThread().getName());
+        Function<String, CompletableFuture<String>> sparkSubmitter = createSparkProcessor();
+        FileProcessor fileProcessor = new FileProcessor(sourceConfig, sparkSubmitter);
+        fileProcessor.process();
+        log.info("complete directory monitoring job, directory: {}, Thread name: {}", sourceConfig.directory, Thread.currentThread().getName());
+
     }
 
     public Boolean acquireLock(Lock lock) {
@@ -85,18 +94,23 @@ if (acquireLock(lock)) {
 ~~~
 
 - use stream to iterate `extractConfigDirectoryList` and foreach conig call `CompletableFuture.runAsync` to run the code **asychronize**
+It return list of `CompletableFuture<Void>` objects.
 
 ~~~java
-extractConfigDirectoryList.stream().map(sourceConfig -> CompletableFuture.runAsync(() -> {
-	...
-}, executorService))
+List<CompletableFuture<Void>> futures = extractConfigDirectoryList.stream().map(
+	sourceConfig -> CompletableFuture.runAsync(() -> { runJob(sourceConfig); }, executorService)
+).collect(Collectors.toList());
 ~~~
 
 here it use the `CompletableFuture.runAsync(Runnable, ExecutorService)` interface, it return a `CompletableFuture<Void>` object.
 
-- then use another `map` method of stream to run `CompletableFuture.join()` method that will block the current thread and once the all the job done, this will return `List<Void>` object since we call `runAsync` method.
-
 - After all jobs done, unlock the lock, back to the while loop.
+
+~~~java
+//wait for all the jobs to complete
+CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new)).join();
+lock.unlock();
+~~~
 
 - Outside the while loop, there is `try...finally` to trap all the exception, if any thing happened, to prevent infinite loop, set the `running` to false and this will stop the while loop immediately
 
