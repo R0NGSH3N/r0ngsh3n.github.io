@@ -249,7 +249,6 @@ EOF
 
 default VIM shortcuts:
 
-
 ~~~vim
 
 
@@ -262,4 +261,4 @@ nnoremap  <silent> <tab>  :if &modifiable && !&readonly && &modified <CR> :write
 nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 nnoremap  <silent> <A-F4>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bw<CR>
 
-~~
+~~~

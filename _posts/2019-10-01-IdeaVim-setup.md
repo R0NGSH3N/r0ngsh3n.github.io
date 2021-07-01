@@ -22,6 +22,37 @@ Daily Idea Vim Shortcuts Cheat Sheet:
 | \<L\> + T  | pop refactory this window, in visual mode |
 | \<L\> + rr  | rename |
 | \<L\> + rg  | pop generate window|
+| \<L\> + q | close content|
+| \<L\> + ps|  split horizontal |
+| \<L\> + pv|  split vertical |
+| \<L\> + wc|  unsplit |
+| \<L\> + wn|  next split window - same as <C-w>w |
+| \<L\> + x | goto next error | 
+| \<L\> + X | goto previous error |
+| \<L\> + h | move back |
+| \<L\> + l | move forward |
+| \<L\> + g | go to declaration |
+| \<L\> + i | go to implementation |
+|[b | previous tab |
+|]b | next tab |
+|\<L\> + u | find usage |
+|\<L\> + f | open file |
+|\<L\> + c | open class |
+|\<L\> + s | open symbol |
+|\<L\> + ; | open current file structure |
+|\<L\> + d | show error message |
+|\<L\> + I | show selectIn popup |
+|\<L\> + e | popup recent Files |
+|\<L\> + b | show bookmark |
+|visual mode: T | popup refactoring menu |
+|<leader>rg | pop up generate window |
+|<leader>rc | pop up inspector window|
+|,b | debug |
+|,r | run |
+|,c | run class |
+|,d | debug class |
+|,t | run tests |
+|,T | rerun failed Tests |
 
 ## Set command you can use in IdeaVim: [link](https://github.com/JetBrains/ideavim/wiki/%22set%22-commands)
 
