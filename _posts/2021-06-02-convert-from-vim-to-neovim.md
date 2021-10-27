@@ -237,7 +237,7 @@ call plug#begin('~/.vim/plugged')
 
 Add following in `init.vim`:
 
-3. 10/27/2021 update for `nvim-tree` plugin
+3.10/27/2021 update for `nvim-tree` plugin
 
 you need add following in `init.vim`
 
