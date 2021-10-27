@@ -195,6 +195,10 @@ call plug#begin('~/.vim/plugged')
 call plug#begin('~/.vim/plugged')
 ~~~
 
+## Commands for `vim-plug`
+
+:PlugInstall <br>
+:PlugUpdate
 ## Plugins
 
 |  Plugin Names | Description | Link |
