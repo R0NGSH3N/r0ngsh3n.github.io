@@ -273,4 +273,13 @@ nnoremap  <silent> <tab>  :if &modifiable && !&readonly && &modified <CR> :write
 nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 nnoremap  <silent> <A-F4>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bw<CR>
 
+nvim-tree
+
+r: rename file
+x to add/remove file/directory to cut clipboard
+c to add/remove file/directory to copy clipboard
+y will copy name to system clipboard
+p to paste from clipboard. Cut clipboard has precedence over copy (will prompt for confirmation)
+gy will copy absolute path to system clipboard
+d to delete a file (will prompt for confirmation)
 ~~~
