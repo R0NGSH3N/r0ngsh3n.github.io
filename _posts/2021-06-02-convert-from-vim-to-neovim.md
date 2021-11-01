@@ -282,4 +282,5 @@ y will copy name to system clipboard
 p to paste from clipboard. Cut clipboard has precedence over copy (will prompt for confirmation)
 gy will copy absolute path to system clipboard
 d to delete a file (will prompt for confirmation)
+a to create new file
 ~~~
