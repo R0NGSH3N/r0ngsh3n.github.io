@@ -284,3 +284,17 @@ gy will copy absolute path to system clipboard
 d to delete a file (will prompt for confirmation)
 a to create new file
 ~~~
+
+## Install "YouCompleteMe"
+
+1. Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+2. install cmake
+~~~bash
+sudo apt install cmake 
+~~~
+3. run install.py
+
+The `install.py` is in `~/.config/nvim/plugged/YouCompleteMe/`
+~~~bash
+python3 ./install.py --all
+~~~
