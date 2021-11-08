@@ -102,6 +102,45 @@ in this case, you change `angular.json` file, and update the `outputPath` as fol
             "assets": [
 ~~~
 
+in that case, the compiled angular code will be put in static folder:
+~~~java
+server-template/src/main/resources$ tree -L 3
+├── angular
+│   └── hazelcast-server-ui
+│       ├── angular.json
+│       ├── e2e
+│       ├── karma.conf.js
+│       ├── node_modules
+│       ├── package.json
+│       ├── package-lock.json
+│       ├── README.md
+│       ├── src
+│       ├── tsconfig.app.json
+│       ├── tsconfig.json
+│       ├── tsconfig.spec.json
+│       └── tslint.json
+├── application-instance.yml
+├── application-server.yml
+├── application.yml
+├── logback.xml
+└── static
+    ├── favicon.ico
+    ├── index.html
+    ├── main.js
+    ├── main.js.map
+    ├── polyfills.js
+    ├── polyfills.js.map
+    ├── runtime.js
+    ├── runtime.js.map
+    ├── styles.css
+    ├── styles.css.map
+    ├── vendor.js
+    └── vendor.js.map
+~~~
+
+in that case, once you `ng b`, you can run `bootRun` in gradle and angular will show.
+
+
 ~~~bash
 ng new my-app
 ~~~
