@@ -5,6 +5,12 @@ tags: Vim Intellij
 categories: common
 ---
 
+Plugins:
+
+- IdeaVim
+- IdeaVim-EasyMotion
+- IdeaVimExtension
+
 Daily Idea Vim Shortcuts Cheat Sheet:
 
 | shortcuts  | descriptions   |
