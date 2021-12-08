@@ -9,7 +9,7 @@ Plugins:
 
 - IdeaVim
 - IdeaVim-EasyMotion
-- IdeaVimExtension
+IdeaVimExtension
 
 Daily Idea Vim Shortcuts Cheat Sheet:
 
@@ -41,6 +41,8 @@ Daily Idea Vim Shortcuts Cheat Sheet:
 | \<L\> + i | go to implementation |
 |[b | previous tab |
 |]b | next tab |
+|zc | fold current method |
+|zo | unfold current method |
 |\<L\> + u | find usage |
 |\<L\> + f | open file |
 |\<L\> + c | open class |
