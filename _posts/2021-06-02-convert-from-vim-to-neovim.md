@@ -17,7 +17,7 @@ categories: common
 
 I have been using vim for more than 20 years now, and I decide to take a look of neovim and build neovim as my major (hope only also) IDE.
 
-## Neovim installatoin
+## Neovim Installation 
 
 the new neovim support neovim-lsp, but that version need to install from git, I have arch linux, so it makes it easier:
 
