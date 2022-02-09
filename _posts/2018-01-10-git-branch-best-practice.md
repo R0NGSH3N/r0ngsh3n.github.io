@@ -27,6 +27,9 @@ categories: common
     git checkout pending-merge-branch 
 ~~~
 
-## Update file
+## Update file on master branch
+
+    update this file on master branche now....after update on `update-article`
+    branch
 
 
