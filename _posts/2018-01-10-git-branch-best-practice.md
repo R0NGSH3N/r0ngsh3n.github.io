@@ -31,6 +31,7 @@ categories: common
 
     update this file on master branche now....after update on `update-article`
     branch
+
 ## Update file in branch `update-article`
 
     "This is the content will update in branch "update-article" not on master"
@@ -101,3 +102,23 @@ git log --all --oneline --graph --decorate
 
 
 ## Merge from `update-article` to `master` 
+
+1. You need to flip back to the master branch
+2. run `git merge update-artcle` command
+3. Because we update the article on both branch, merge will fail:
+
+~~~bash
+❯ git merge update-article
+Auto-merging _posts/2018-01-10-git-branch-best-practice.md
+CONFLICT (content): Merge conflict in _posts/2018-01-10-git-branch-best-practice.md
+Automatic merge failed; fix conflicts and then commit the result.
+
+~~~
+
+4. The conflict part will be save in the file itself!
+
+"<<<<<< HEAD" and "=====" determine between content is from `master` branch
+">>>>>> update-article" determine content from `update-artcle` branch
+
+5. resolve the issue, remove those ">" and "=" then do `add` and `commit`, it
+   will push to mater branch
