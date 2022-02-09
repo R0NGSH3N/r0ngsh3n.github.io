@@ -5,6 +5,12 @@ tags: Vim Intellij
 categories: common
 ---
 
+Plugins:
+
+- IdeaVim
+- IdeaVim-EasyMotion
+IdeaVimExtension
+
 Daily Idea Vim Shortcuts Cheat Sheet:
 
 | shortcuts  | descriptions   |
@@ -35,6 +41,8 @@ Daily Idea Vim Shortcuts Cheat Sheet:
 | \<L\> + i | go to implementation |
 |[b | previous tab |
 |]b | next tab |
+|zc | fold current method |
+|zo | unfold current method |
 |\<L\> + u | find usage |
 |\<L\> + f | open file |
 |\<L\> + c | open class |

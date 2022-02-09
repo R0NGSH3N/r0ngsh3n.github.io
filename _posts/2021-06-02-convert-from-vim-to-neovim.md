@@ -195,6 +195,10 @@ call plug#begin('~/.vim/plugged')
 call plug#begin('~/.vim/plugged')
 ~~~
 
+## Commands for `vim-plug`
+
+:PlugInstall <br>
+:PlugUpdate
 ## Plugins
 
 |  Plugin Names | Description | Link |
@@ -233,6 +237,14 @@ call plug#begin('~/.vim/plugged')
 
 Add following in `init.vim`:
 
+3.10/27/2021 update for `nvim-tree` plugin
+
+you need add following in `init.vim`
+
+~~~bash
+lua require'nvim-tree'.setup {}
+~~~
+
 ~~~vim
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -249,16 +261,167 @@ EOF
 
 default VIM shortcuts:
 
-~~~vim
+### fzf
 
+~~~vim
 
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr> "list current buffer and search
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+~~~
+
+### tab
+
+~~~vim
 
 nnoremap  <silent> <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
 nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 nnoremap  <silent> <A-F4>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bw<CR>
+~~~
+
+### nvim-tree
+
+~~~vim
+r: rename file
+x to add/remove file/directory to cut clipboard
+c to add/remove file/directory to copy clipboard
+y will copy name to system clipboard
+p to paste from clipboard. Cut clipboard has precedence over copy (will prompt for confirmation)
+gy will copy absolute path to system clipboard
+d to delete a file (will prompt for confirmation)
+a to create new file
+~~~
+
+### nvim-jdtls
+
+~~~vim
+nnoremap <leader>o <Cmd>lua require'jdtls'.organize_imports()<CR>
+nnoremap <leader>i <Cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap gD <Cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap gd <Cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap gi <Cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap gK <Cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap gs <Cmd>lua vim.lsp.buf.signature_help()<CR>
+
+nnoremap <leader>af <Cmd>lua require"jdtls".code_action()<CR>
+nnoremap <leader>ah <Cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>ar <Cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>ai <Cmd>lua vim.lsp.buf.incoming_calls()<CR>
+nnoremap <leader>ao <cmd>lua vim.lsp.buf.outgoing_calls()<CR>
+
+<C-o> go back to previous location
 
 ~~~
+
+## Install "YouCompleteMe" - out-of-date
+
+1. Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+2. install cmake
+~~~bash
+sudo apt install cmake 
+~~~
+3. run install.py
+
+The `install.py` is in `~/.config/nvim/plugged/YouCompleteMe/`
+~~~bash
+python3 ./install.py --all
+~~~
+
+## Install "nvim-cmp"
+
+1.  Install plugins in `init.vim`
+
+~~~bash
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+~~~
+
+2. copy paste the config
+
+~~~bash
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {"java"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { },  -- list of language that will be disabled
+  },
+}
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+        -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
+      end,
+    },
+    mapping = {
+      ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Setup lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig')['jdtls'].setup {
+    capabilities = capabilities
+  }
+EOF
+
+~~~
+
+3. add lsp server:
+
+~~~bash
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig')['jdtls'].setup {
+    capabilities = capabilities
+  }
+~~~
+
+
+4. Run "PlugInstall"

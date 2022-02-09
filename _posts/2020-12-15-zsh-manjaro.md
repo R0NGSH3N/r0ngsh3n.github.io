@@ -5,6 +5,8 @@ tags: Linux Manjaro Zsh shell
 categories: common
 ---
 
+## Zsh on Manjaro
+
 1. Install Zsh
 
     ~~~bash
@@ -47,3 +49,7 @@ categories: common
 after set of question & selection, you will have terminal like this:
 
 ![picture2](https://r0ngsh3n.github.io/static/img/1215/2021-01-21_10-20.png)
+
+## Zsh on Ubuntu
+
+1. Install Oh My Zsh
