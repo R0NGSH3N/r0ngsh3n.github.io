@@ -31,12 +31,12 @@ Based on that CAP theorem, so here we are going to talk about how to maintain th
 There are 3 type of Consistency:
 
 1. `Strong Consistency`: All accesses are seen by all parallel processes (or nodes, processors, etc.) in the same order (sequentially)
-        Meaning: what we read is what someone write, 
+        <br>Meaning: what we read is what someone write, 
 2. `Weak Consistency`:  
         - All accesses to synchronization variables are seen by all processes (or nodes, processors) in the same order (sequentially) - these are synchronization operations. Accesses to critical sections are seen sequentially.<br>
         - All other accesses may be seen in different order on different processes (or nodes, processors).
         - The set of both read and write operations in between different synchronization operations is the same in each process.
-        Meaning: no guaranteed you will read the value after write, but will try best to provide the written data in shortest time
+        <br>Meaning: no guaranteed you will read the value after write, but will try best to provide the written data in shortest time
 3. `Final Consistency` __THIS IS BEST WE CAN DO AND THIS WHAT WE ARE LOOKING FOR__
         Special type of `Weak Consistency`
 
