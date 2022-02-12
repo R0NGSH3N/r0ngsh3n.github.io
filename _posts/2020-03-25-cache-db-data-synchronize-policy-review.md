@@ -50,3 +50,13 @@ To ensure the `Final Consistency` between Cache and DB, We have following Cache 
 ![picture 1](https://r0ngsh3n.github.io/static/img/../../../../../static/img/cache-aside.drawio.png)
 
 
+** Why __delete__ data not __update__ data in cache?
+
+1. Performance Consideration: if Data in cache is calculated, then update might cause more calculation, which is expensive, just delete is cheapest way and also fit `Lazy Initialize` policy.
+<br>
+2. Race Condition while update Data: if Thread1 suppose update first and Thread2 update second, but because the network reason, Thread2 update first, then Thread1, then this cause the data in Cache is not latest.
+
+** Why delete database __first__, not Cache data?
+
+
+![picture 2](https://r0ngsh3n.github.io/static/img/../../../../../static/img/cache-aside-erro1.drawio.png)
