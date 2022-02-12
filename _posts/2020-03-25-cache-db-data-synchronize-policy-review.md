@@ -21,7 +21,7 @@ When a network partition failure happens, it must be decided whether to
 cancel the operation and thus decrease the availability but ensure consistency or to
 proceed with the operation and thus provide availability but risk inconsistency.
 
-                                                                            -- Wikipedia CAP Theorem
+-- Wikipedia CAP Theorem
 
 
 Based on that CAP theorem, so here we are going to talk about how to maintain the `Consistency` and `Partition Tolerance` between Cache and Database data where there is issue happened.
@@ -41,6 +41,12 @@ There are 3 type of Consistency:
         Special type of `Weak Consistency`
 
 
-## Final Consistency between Cache and DB -  HOW? 
+## Final Consistency between Cache and DB -  Cache Policy
 
-### Cache Policy
+To ensure the `Final Consistency` between Cache and DB, We have following Cache Policy we can implement.
+
+### 1. Cache-Aside
+
+![picture 1](https://r0ngsh3n.github.io/static/img/../../../../../static/img/cache-aside.drawio.png)
+
+
