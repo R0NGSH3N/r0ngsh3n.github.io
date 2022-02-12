@@ -103,3 +103,12 @@ But review the possibility of this scienario:
 
 
 ![picture 5](https://r0ngsh3n.github.io/static/img/../../../../../static/img/better-cache-aside.drawio.png)
+
+in the above picture, we add `Lock` when read request query DB and update the Cache, this make query DB and update cache become atomic process to prevent any dirty read.
+
+### 3. a Better Better Version of Cache-Aside Policy: Read-Through Policy
+
+Read-Through Policy is very similar like Cache-Aside Policy, but different is __Read Request will NOT handle the Query DB and Update Cache part,__ instead, it will wait for another service provider to query DB and Update Cache, and then just read from Cache.
+
+![picture 6](https://r0ngsh3n.github.io/static/img/../../../../../static/img/Read-through.drawio.png)
+
