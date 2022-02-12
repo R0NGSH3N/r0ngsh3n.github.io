@@ -50,13 +50,13 @@ To ensure the `Final Consistency` between Cache and DB, We have following Cache 
 ![picture 1](https://r0ngsh3n.github.io/static/img/../../../../../static/img/cache-aside.drawio.png)
 
 
-** Why __delete__ data not __update__ data in cache?
+####** Why __delete__ data in cache not __update__ data in cache?
 
-1. Performance Consideration: if Data in cache is calculated, then update might cause more calculation, which is expensive, just delete is cheapest way and also fit `Lazy Initialize` policy.
+1. Performance Consideration: if data in cache is calculated, then update might cause more calculation(maybe joint on other set of data etc.), which is expensive, just delete is cheapest way and also fit `Lazy Initialize` policy.
 <br>
-2. Race Condition while update Data: if Thread1 suppose update first and Thread2 update second, but because the network reason, Thread2 update first, then Thread1, then this cause the data in Cache is not latest.
+2. Race Condition while update Data: if Thread1 suppose update first and Thread2 update second, Thread1 should complete 2 steps (see picture above) as atomic process before Thread2 start, but because the network reason, after Thread1 update database, Thread2 start, and Threa2 complete Update Database and update cache earlier than Thread1, then the data in cache is Thread1 data not Thread2 data.
 
-** Why delete database __first__, not Cache data?
+####** Why delete database __first__, not Cache data?
 
 ![picture 2](https://r0ngsh3n.github.io/static/img/../../../../../static/img/cache-aside-erro1.drawio.png)
 
@@ -69,8 +69,18 @@ In the above Pciture
 
 5. Now the Data and Cache is out of sync...
 
-** Fuck it! I just want to delete Cache first then update DB, can I?
+####** Fuck it! I just want to delete Cache first then update DB, can I?
 Yes, you can. But you need `Double Delete` strategy
 
 
 ![picture 3](https://r0ngsh3n.github.io/static/img/../../../../../static/img/double-delete-cache.drawio.png)
+
+in the write request - `Sleep for some time` that time ususally is little bit bigger than the read request time expense.
+
+
+####** So...is Cache-side Policy guarantee "Consistence" between DB and Cache?
+
+__No!!!!!__
+
+![picture 4](https://r0ngsh3n.github.io/static/img/../../../../../static/img/cache-aside-erro2.png)
+
