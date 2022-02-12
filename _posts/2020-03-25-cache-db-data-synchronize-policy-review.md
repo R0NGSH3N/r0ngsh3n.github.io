@@ -112,3 +112,5 @@ Read-Through Policy is very similar like Cache-Aside Policy, but different is __
 
 ![picture 6](https://r0ngsh3n.github.io/static/img/../../../../../static/img/Read-through.drawio.png)
 
+in this version, we created `Cache Read Controller`, the read request only deal with that controller, not have access with Cache directly, and the `Cache Read Controller` handle the query DB and update Cache, and will eliminate the multi threads issue.
+
