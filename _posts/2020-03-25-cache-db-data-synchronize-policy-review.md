@@ -58,5 +58,19 @@ To ensure the `Final Consistency` between Cache and DB, We have following Cache 
 
 ** Why delete database __first__, not Cache data?
 
-
 ![picture 2](https://r0ngsh3n.github.io/static/img/../../../../../static/img/cache-aside-erro1.drawio.png)
+
+In the above Pciture
+
+1. Thread 1 is write request start first: 1. Delete data in Cache 
+2. Thread 2 is read request and come next: 2. Query Data in Cache, and data is not in Cache - delete by Thread 1 - so go DB and read data from there
+3. Thread 1 now is going to add new data in DB - DB data is updated to the latest data
+4. Thread 2 after read the data from DB, now <u>update cache with the data it read from DB, which is NOT latest data Thread 1 just write in</u>
+
+5. Now the Data and Cache is out of sync...
+
+** Fuck it! I just want to delete Cache first then update DB, can I?
+Yes, you can. But you need `Double Delete` strategy
+
+
+![picture 3](https://r0ngsh3n.github.io/static/img/../../../../../static/img/double-delete-cache.drawio.png)
