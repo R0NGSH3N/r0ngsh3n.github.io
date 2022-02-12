@@ -84,3 +84,22 @@ __No!!!!!__
 
 ![picture 4](https://r0ngsh3n.github.io/static/img/../../../../../static/img/cache-aside-erro2.png)
 
+In the above Picture:
+
+1. Thread 1 is read request, and try to query the data is not Cache.
+2. Thread 1 query the database and get the data.
+3. Thread 2 is write request, and it update the database after Thread1 read the data from Database.
+4. Thread 2 Delete Data from Cache, and complete the process.
+5. Thread 1 now update the cache with the old data it read from Database.
+
+In this situation, the data in Cache and DB is out of sync.
+
+But review the possibility of this scienario:
+
+1. The data is not cache is less common.
+2. Usually Read DB process is faster than write DB, very rare case that Thread1 query DB and then update Cache after Thread2 complete the proces that update database and Delete cache.
+
+### 2. Better Version of Cache-Aside Policy
+
+
+![picture 5](https://r0ngsh3n.github.io/static/img/../../../../../static/img/better-cache-aside.drawio.png)
