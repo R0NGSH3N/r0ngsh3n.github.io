@@ -23,7 +23,6 @@ proceed with the operation and thus provide availability but risk inconsistency.
 
 -- Wikipedia CAP Theorem
 
-
 Based on that CAP theorem, so here we are going to talk about how to maintain the `Consistency` and `Partition Tolerance` between Cache and Database data where there is issue happened.
 
 ## Consistency
@@ -114,3 +113,11 @@ Read-Through Policy is very similar like Cache-Aside Policy, but different is __
 
 in this version, we created `Cache Read Controller`, the read request only deal with that controller, not have access with Cache directly, and the `Cache Read Controller` handle the query DB and update Cache, and will eliminate the multi threads issue.
 
+### 4. Write-Through Policy
+
+In the `Read-Through` policy, we add `Cache Read Controller` layer at the read request process, now, `Write-Through` policy add 1 more layer on write request process which have better handling on write process:
+
+
+__But different as `Cache-Aside` policy, `Write-Through` policy does NOT delete cache, but update__
+
+![picture 7](https://r0ngsh3n.github.io/static/img/../../../../../static/img/Read-through.drawio.png)
