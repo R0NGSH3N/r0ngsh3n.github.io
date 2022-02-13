@@ -117,7 +117,16 @@ in this version, we created `Cache Read Controller`, the read request only deal 
 
 In the `Read-Through` policy, we add `Cache Read Controller` layer at the read request process, now, `Write-Through` policy add 1 more layer on write request process which have better handling on write process:
 
-
 __But different as `Cache-Aside` policy, `Write-Through` policy does NOT delete cache, but update__
 
-![picture 7](https://r0ngsh3n.github.io/static/img/../../../../../static/img/Read-through.drawio.png)
+![picture 7](https://r0ngsh3n.github.io/static/img/../../../../../static/img/write-through.drawio.png)
+
+The `Write-Through` policy update database and update cache 2 steps suggest to wrap up with lock, so it will prevent the multiple write request has race condition issue and cause the inconsistency between DB and Cache.
+
+Usually `Write-through` policy will implement at the high requirement of consistency environment, but it's high expense of resource should be considered as well.
+
+### 5. Write-behind Policy
+
+`Write-behind` Policy means only update cache but not database, the update of database will be implemented in an asychronize process.
+
+![picture 8](https://r0ngsh3n.github.io/static/img/../../../../../static/img/write-behind.drawio.png)
