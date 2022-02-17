@@ -51,3 +51,22 @@ OK
 127.0.0.1:6379> get name 
 "r0ngsh3n"
 ~~~
+
+## Jedis + Redis
+
+in build.gradle, add `Jedis` dependency:
+
+~~~groovy
+    implementation 'redis.clients:jedis:4.1.0'
+~~~
+
+then write your code:
+
+~~~java
+   public static void main(String[] args){
+        JedisPooled jedis = new JedisPooled("localhost", 6379);
+        jedis.set("your_name", "hello_world");
+        String value = jedis.get("your_name");
+
+    }
+~~~
