@@ -94,6 +94,8 @@ This change database to 10
 
 ## Jedis + Redis
 
+Jedis is the old Redis client, it support most of Redis commands, but it is `synchronize` process, and use block I/O.
+
 in build.gradle, add `Jedis` dependency:
 
 ~~~groovy
@@ -110,6 +112,12 @@ then write your code:
 
     }
 ~~~
+
+## Redisson + Redis
+
+## Lettuce + Redis
+
+## SpringBoot + RedisTemplate + Redis
 
 ## SpringBoot + Jedis + Redis
 
