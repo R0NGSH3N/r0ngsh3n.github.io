@@ -191,4 +191,89 @@ in your code:
 @PropertySource("file:${some.properties}/some.properties")
 ~~~
 
+## Validation Annotation
+
+The Validation Annotation actually is from `Hibernate Validator` framework (underneath is `Bean Validation` Framework), when you have `spring-boot-starter-web` in your path, then `hibernate-validator` automatically added to you dependencies.
+
+One thing to notice: make sure you import `javax.validation.constraints` not `org.hibernate.validator.constraints`
+
+- @NotEmpty String can not be null, can not be empty
+- @NotBlank String can not be null, at least 1 non blank charactor
+- @Null Must be null
+- @NotNull Must not be null
+- @AssertTrue Boolean variable must be TRUE
+- @AssertFalse Boolean variable must be FALSE
+- @Pattern(regex=,flag=) String must match the regex pattern
+- @Email String must be email
+- @Min(value) Must be Number, value must be larger than `value`
+- @Max(value) Must be Number, value must be less than `value`
+- @DecimalMin(value) Must be Decimal(float/double) must be larger than `value`
+- @DecimalMax(value) Must be Decimal(float/double), must be less than `value`
+- @Size(max=, min=) value must between `max` and `min`
+- @Digits (integer, fraction) Must be Number and value must be in the range
+- @Past Must be date, and value in the past
+- @Future Must be date, and value in the future
+
+### @Valid, @ControllerAdvice and @ExceptionHandler
+
+You can use `@Valid` on `@RequestBody`, see the detail of usage [here](https://r0ngsh3n.github.io//common/restful/)
+
+## Annotation for Json process
+
+### `@JsonIgnoreProperties` and `@JsonIgnore`
+
+This annotation used on class level, to notify spring ignore some attributes in the json class, but `@JsonIgnore` used on attributes to mark Spring to ignore - Don't know why Spring create 2 of them.
+
+~~~Java
+@JsonIgnoreProperties({"roles"})
+public class Actor{
+
+    private String name;
+    @JsonIgnore
+    private List<String> roles = new ArrayList<>();
+}
+~~~
+
+### `@JsonFormat`
+
+used to format attribute in class for Json
+
+~~~Java
+@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
+private Date date;
+~~~
+
+### `@JsonUnwrapped`
+
+This annotation will remove the attribute name in json file:
+
+Before
+~~~Json
+{
+  "people": {
+    "name" : "rs",
+    "role" : "programmer"
+  }
+}
+~~~
+
+After
+~~~Json
+{
+    "name" : "rs",
+    "role" : "programmer"
+}
+~~~
+
+~~~Java
+public class Data{
+  @JsonUnrapped
+  private People people;
+}
+
+public class People{
+  private String name;
+  private String role;
+}
+~~~
 
