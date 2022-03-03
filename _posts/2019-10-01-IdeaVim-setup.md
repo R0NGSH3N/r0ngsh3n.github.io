@@ -8,8 +8,9 @@ categories: common
 Plugins:
 
 - IdeaVim
-- IdeaVim-EasyMotion
-IdeaVimExtension
+- ACEJump
+
+ACEJump - I used to use `easy-mostion` but ACE Jump is native to use: just `Ctrl+;` then type any letter, it will show as same effects as VIM easy-motion
 
 Daily Idea Vim Shortcuts Cheat Sheet:
 
