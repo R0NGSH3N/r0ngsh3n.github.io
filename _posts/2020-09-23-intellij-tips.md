@@ -164,3 +164,7 @@ You can save your java file into favorite -- just like same as Chrome browser.
 `zc` - expand folding
 
 `zo` - collapse folding
+
+## see dependency diagram
+
+`Ctrl+shift+Alt+U`
