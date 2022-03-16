@@ -26,10 +26,9 @@ Nerd font is required by couple of plug in (vim-devicon)
 
 4. run command fc-list | grep <fontName> to verify nerd font install correctly
 
-
 ### Set Guifont for Nerd Font
 
-if you are using neovim, then you need change the font of the terminal and then restart vim, if you use vim then you need to use 
+if you are using neovim, then you need change the font of the terminal and then restart vim, if you use vim then you need to use
 
 ~~~bash
 :set guifont=JetBrains\ Mono\ Nerd\ Font:h10
@@ -46,7 +45,6 @@ in vim :
 ~~~
 
 if you see the icon then you are fine, it you see some weird icon, then it is not.
-
 
 ## Set up vimrc or init.vim file
 
@@ -228,4 +226,62 @@ python3 ./install.py --java-completer
 
 4. restart nvim
 
-### Setup ALE
+### setup surround
+
+install:
+
+~~~bash
+git clone https://tpope.io/vim/surround.git  ~/.vim/bundle/surround
+~~~
+
+shortcuts:
+
+- add surround on the line: `yss` + character
+- add surround on the word: `ysiw` + character: ysiw + "
+- change surround: `cs` + original character + replace character
+- remove surround: `ds` + character
+- multiple line surround: shift + v + shift + s + character"  V + select lines + S + "
+
+
+### easy motion
+
+leader + f : jump to character
+leader + w : jump to word
+leader + s : jump to 2 characters - you type 2 in command line
+leader + L : move to line
+
+### move to pathogen
+
+1. Install Pathogen:
+
+~~~bash
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+~~~
+
+2. enable Pathogen
+
+in `~/.vimrc` add "execute pathogen#infect()"
+
+3. Install plugins
+
+clone whatever plugins you want into `~/.vim/bundle` folder
+
+~~~bash
+git clone https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree
+~~~
+
+Here is the plugins that I installed
+
+~~~bash
+total 36
+drwxrwxr-x  9 rongshen rongshen 4096 Mar 15 23:07 ./
+drwxrwxr-x  5 rongshen rongshen 4096 Mar 15 22:16 ../
+drwxrwxr-x 10 rongshen rongshen 4096 Mar 15 22:21 nerdtree/
+drwxrwxr-x  6 rongshen rongshen 4096 Mar 15 22:33 surround/
+drwxrwxr-x  8 rongshen rongshen 4096 Mar 15 22:52 vim-airline/
+drwxrwxr-x  8 rongshen rongshen 4096 Mar 15 22:53 vim-airline-themes/
+drwxrwxr-x  5 rongshen rongshen 4096 Mar 15 23:05 vim-buffet/
+drwxrwxr-x  5 rongshen rongshen 4096 Mar 15 22:56 vim-colorschemes/
+drwxrwxr-x  8 rongshen rongshen 4096 Mar 15 23:07 vim-easymotion/
+~~~
