@@ -63,6 +63,12 @@ replace any Character or Character combination with another Charactor
     System.out.println(CharMatcher.anyOf("bc").collapseFrom("abcbc", '-' )); // return "a--"
 ~~~
 
+replace any String with another String: replace tab with 4 spaces
+
+~~~Java
+    rawText = CharMatcher.anyOf("\t").replaceFrom(rawText, "    ")  ;
+~~~
+
 trim String
 
 ~~~Java
