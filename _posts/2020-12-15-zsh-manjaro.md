@@ -5,7 +5,9 @@ tags: Linux Manjaro Zsh shell
 categories: common
 ---
 
-## Zsh on Manjaro
+## Install Zsh on Linux
+
+### Manjaro
 
 1. Install Zsh
 
@@ -53,3 +55,40 @@ after set of question & selection, you will have terminal like this:
 ## Zsh on Ubuntu
 
 1. Install Oh My Zsh
+
+~~~bash
+sudo apt install zsh
+~~~
+
+2. You can change the theme in the `.zshrc`
+
+~~~bash
+ZSH_THEME="agnoster"
+~~~
+
+3. Install `powerlevel10k`
+
+~~~bash
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+p10k configure <- this command start the config
+~~~
+
+4. Install `zsh-autosuggestions`
+
+~~~bash
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+~~~
+
+
+5. Install `zsh-syntax-higlighting`
+
+~~~bash
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+~~~
+
+6. Config the  `zsh-syntax-higlighting` and `zsh-autosuggestions`
+
+~~~bash
+#plugins=(git z)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+~~~
